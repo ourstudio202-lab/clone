@@ -108,8 +108,8 @@ section {
 
 .nav-logo {
     font-size: 1.25rem;
-    font-weight: 500;
-    color: var(--text-primary);
+    font-weight: 600; /* Bumped up to keep it crisp */
+    color: #ffffff; /* Forced pure white */
     text-decoration: none;
     letter-spacing: -0.02em;
 }
@@ -119,24 +119,25 @@ section {
     gap: 2.5rem;
 }
 
+/* Base link state: 100% Bright White */
 .nav-links a {
-    color: var(--text-primary);
+    color: #ffffff; 
     text-decoration: none;
     font-size: 1rem;
     font-weight: 400;
-    opacity: 0.5; 
+    opacity: 1; /* FIXED: Restored full brightness */
     transition: opacity 0.3s ease;
 }
 
+/* Hover state: Fades to 60% */
 .nav-links a:hover {
-    opacity: 1;
+    opacity: 0.6;
 }
 
+/* Active link state: Bolder text to indicate current page */
 .nav-links a.active {
-    opacity: 1;
-    font-weight: 500;
+    font-weight: 600; 
 }
-
 /* ==========================================
    5. Global Footer
    ========================================== */
