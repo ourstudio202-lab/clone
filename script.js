@@ -167,8 +167,20 @@ function initHomePage() {
         activeImage = null;
     });
 
+    // --- SCROLL ANIMATIONS (HERO OVERLAP & FADE) ---
+    gsap.to(".hero-section", {
+        scrollTrigger: {
+            trigger: ".selected-works",
+            start: "top bottom", 
+            end: "top top",      
+            scrub: true          
+        },
+        scale: 0.96,       
+        opacity: 0.3,      
+        ease: "none"
+    });
+
     // --- SCROLL ANIMATIONS (SELECTED WORKS) ---
-    
     gsap.from(".works-header", {
         scrollTrigger: {
             trigger: ".selected-works",
