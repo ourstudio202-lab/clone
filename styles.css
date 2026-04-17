@@ -329,7 +329,7 @@ section {
     background-color: var(--bg-primary);
     
     padding-top: 160px; 
-    padding-bottom: 160px;
+    padding-bottom: 80px;
     min-height: auto; 
 }
 
@@ -456,6 +456,8 @@ section {
 .services-section {
     position: relative;
     z-index: 2; 
+    /* ADD/CHANGE THIS: Controls the space above the "Services" heading */
+    padding-top: 20px; 
     padding-bottom: 160px; 
     background-color: var(--bg-primary);
 }
