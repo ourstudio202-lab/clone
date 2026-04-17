@@ -333,7 +333,7 @@ section {
     justify-content: space-between;
     align-items: flex-end;
     /* Increased space pushing the grid further down */
-    margin-bottom: 80px; 
+    margin-bottom: 40px; 
 }
 
 .works-header h2 {
@@ -374,7 +374,7 @@ section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     /* Generous, perfectly even 80px spacing */
-    gap: 80px; 
+    gap: 40px; 
 }
 
 .work-card {
@@ -424,14 +424,14 @@ section {
 @media (max-width: 900px) {
     .works-grid {
         grid-template-columns: 1fr;
-        gap: 60px;
+        gap: 30px;
     }
     
     .works-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
-        margin-bottom: 50px;
+        margin-bottom: 25px;
     }
     
     .selected-works {
