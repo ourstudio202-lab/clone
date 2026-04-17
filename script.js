@@ -41,14 +41,14 @@ function initGlobalInteractions() {
         return; 
     }
 
-    // Navbar Fade-in (Slight delay to let page settle)
+    // FASTER: Navbar Fade-in
     if (typeof gsap !== "undefined") {
         gsap.from(header, {
             y: -20,
             opacity: 0,
-            duration: 1.2,
+            duration: 0.8,     // Sped up from 1.2s
             ease: "power3.out",
-            delay: 0.3 
+            delay: 0.1         // Reduced delay from 0.3s
         });
     }
 
@@ -79,24 +79,24 @@ function initHomePage() {
 
     const introTl = gsap.timeline();
 
-    // Subtle overall hero fade-in
+    // FASTER: Subtle overall hero fade-in
     introTl.from(heroSection, { 
         opacity: 0, 
-        duration: 0.5, 
+        duration: 0.4,         // Sped up from 0.5s
         ease: "power2.out" 
     })
-    // Staggered text entrance
+    // FASTER: Staggered text entrance
     .from(textLines, {
         y: 40,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.6,         // Sped up from 0.8s
         ease: "power3.out",
-        stagger: 0.15
-    }, "-=0.2") 
-    // Unlock interaction exactly 0.3s after text finishes
+        stagger: 0.1           // Tighter stagger from 0.15s
+    }, "-=0.3")                // Overlaps the background fade earlier
+    // FASTER: Unlock interaction quickly
     .call(() => {
         interactionEnabled = true;
-    }, null, "+=0.3");
+    }, null, "+=0.1");         // Reduced delay from 0.3s to 0.1s
 
 
     // --- IMAGE POP INTERACTION ---
