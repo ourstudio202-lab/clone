@@ -9,10 +9,10 @@ gsap.registerPlugin(ScrollTrigger);
 document.addEventListener("DOMContentLoaded", () => {
     console.log("System initialized. GSAP & ScrollTrigger ready.");
     
-    // Run interactions that appear on every page (Nav, Footer, etc.)
+    // Run global interactions (Navbar & Footer)
     initGlobalInteractions();
 
-    // Determine which page we are on based on the URL
+    // Route to correct page logic
     const currentPath = window.location.pathname;
 
     if (currentPath.includes("work.html")) {
@@ -22,35 +22,49 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (currentPath.includes("contact.html")) {
         initContactPage();
     } else {
-        // Default to Home page logic if no other match is found
         initHomePage();
     }
 });
 
 // ==========================================
-// 3. Page-Specific Functions
+// 3. Global Functions
 // ==========================================
-
 function initGlobalInteractions() {
-    // Code for global navbar / menu / footer animations
+    // Navbar Fade-in
+    gsap.from(".site-header", {
+        y: -20,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        delay: 0.1
+    });
+
+    // Navbar Scroll Effect
+    const header = document.querySelector(".site-header");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
+    });
 }
 
+// ==========================================
+// 4. Page-Specific Functions
+// ==========================================
 function initHomePage() {
     console.log("Home page logic loaded.");
-    // GSAP animations for index.html
 }
 
 function initWorkPage() {
     console.log("Work page logic loaded.");
-    // GSAP animations for work.html
 }
 
 function initAboutPage() {
     console.log("About page logic loaded.");
-    // GSAP animations for about.html
 }
 
 function initContactPage() {
     console.log("Contact page logic loaded.");
-    // GSAP animations for contact.html
 }
