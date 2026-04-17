@@ -79,8 +79,8 @@ function initHomePage() {
     let activeImage = null; // Tracks the currently visible image to prevent overlap
     let zIndexCounter = 1;  
 
-    // INCREASED DISTANCE: Mouse must now move 320 pixels before a new image appears
-    const minDistance = 320; 
+    // REFINED SPAWN CONTROL: 180px threshold to prevent overly frequent triggers
+    const minDistance = 180; 
 
     heroSection.addEventListener("mousemove", (e) => {
         if (lastX === 0 && lastY === 0) {
@@ -99,12 +99,13 @@ function initHomePage() {
 
             const img = popImages[currentIndex];
 
-            // NO OVERLAP RULE: Force the previous image to fade out instantly
+            // CLEAN TRANSITIONS: Smoothly fade out previous image
             if (activeImage && activeImage !== img) {
                 gsap.to(activeImage, { 
                     opacity: 0, 
-                    scale: 0.95, 
+                    scale: 0.92, // Exit scale upgrade
                     duration: 0.4, 
+                    ease: "power3.out", // Easing upgrade
                     overwrite: "auto" 
                 });
             }
@@ -113,29 +114,34 @@ function initHomePage() {
 
             const rect = heroSection.getBoundingClientRect();
             
-            // RANDOMIZED SCATTER: Shifts image between -80px and +80px from cursor
-            const randomOffsetX = gsap.utils.random(-80, 80);
-            const randomOffsetY = gsap.utils.random(-80, 80);
+            // NATURAL POSITIONING: Subtle random offset (-30px to +30px)
+            const randomOffsetX = gsap.utils.random(-30, 30);
+            const randomOffsetY = gsap.utils.random(-30, 30);
             
-            const xPos = (e.clientX - rect.left) + randomOffsetX - 120; 
-            const yPos = (e.clientY - rect.top) + randomOffsetY - 180; 
+            // Center calculation + subtle random offset
+            const xPos = (e.clientX - rect.left) - 120 + randomOffsetX; 
+            const yPos = (e.clientY - rect.top) - 150 + randomOffsetY; 
 
-            // RANDOMIZED TILT: Rotates image between -25 and +25 degrees
-            const randomRotation = gsap.utils.random(-25, 25);
+            // SUBTLE DEPTH: Very slight random rotation (-5deg to +5deg)
+            const randomRotation = gsap.utils.random(-5, 5);
 
+            // TIMING VARIATION: Randomize hold duration between 0.5s to 0.8s
+            const holdTime = gsap.utils.random(0.5, 0.8);
+
+            // Set initial state
             gsap.set(img, {
                 x: xPos,
                 y: yPos,
                 rotation: randomRotation, 
-                scale: 0.8,
+                scale: 0.85, // Entry scale upgrade
                 opacity: 0,
                 zIndex: zIndexCounter++
             });
 
-            // ANIMATION: Smooth pop in, hold, then fade out
+            // ENTRY & EXIT ANIMATIONS: Smooth power3.out easing
             gsap.timeline()
-                .to(img, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" })
-                .to(img, { opacity: 0, scale: 0.95, duration: 0.5, ease: "power2.inOut" }, "+=1.0");
+                .to(img, { opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" })
+                .to(img, { opacity: 0, scale: 0.92, duration: 0.4, ease: "power3.out" }, `+=${holdTime}`);
 
             activeImage = img;
             currentIndex = (currentIndex + 1) % popImages.length;
@@ -144,7 +150,7 @@ function initHomePage() {
 
     // Clean up completely if the mouse leaves the hero section
     heroSection.addEventListener("mouseleave", () => {
-        gsap.to(popImages, { opacity: 0, scale: 0.95, duration: 0.4, overwrite: "auto" });
+        gsap.to(popImages, { opacity: 0, scale: 0.92, duration: 0.4, ease: "power3.out", overwrite: "auto" });
         lastX = 0; 
         lastY = 0;
         activeImage = null;
