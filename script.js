@@ -70,30 +70,30 @@ function initHomePage() {
 
     const heroSection = document.querySelector(".hero-section");
     const popImages = document.querySelectorAll(".hero-pop-images img");
-    const textLines = document.querySelectorAll(".hero-title span"); // Target the 3 text lines
+    const textLines = document.querySelectorAll(".hero-title span"); 
 
     if (!heroSection || popImages.length === 0) return;
 
     // --- ENTRANCE ANIMATION & INTERACTION LOCK ---
-    let interactionEnabled = false; // Locks mouse interaction initially
+    let interactionEnabled = false; 
 
     const introTl = gsap.timeline();
 
-    // 1. Subtle overall hero fade-in
+    // Subtle overall hero fade-in
     introTl.from(heroSection, { 
         opacity: 0, 
         duration: 0.5, 
         ease: "power2.out" 
     })
-    // 2. Staggered text entrance
+    // Staggered text entrance
     .from(textLines, {
         y: 40,
         opacity: 0,
         duration: 0.8,
         ease: "power3.out",
         stagger: 0.15
-    }, "-=0.2") // Overlaps slightly with the hero fade-in for smoothness
-    // 3. Interaction Delay: Unlock mouse movement 0.3s after text finishes
+    }, "-=0.2") 
+    // Unlock interaction exactly 0.3s after text finishes
     .call(() => {
         interactionEnabled = true;
     }, null, "+=0.3");
@@ -109,7 +109,6 @@ function initHomePage() {
     const minDistance = 180; 
 
     heroSection.addEventListener("mousemove", (e) => {
-        // Block interaction until the entrance timeline completes
         if (!interactionEnabled) return;
 
         if (lastX === 0 && lastY === 0) {
@@ -151,7 +150,6 @@ function initHomePage() {
             const randomRotation = gsap.utils.random(-5, 5);
             const holdTime = gsap.utils.random(0.5, 0.8);
 
-            // Updated softer start scale (0.9 instead of 0.85)
             gsap.set(img, {
                 x: xPos,
                 y: yPos,
@@ -161,7 +159,6 @@ function initHomePage() {
                 zIndex: zIndexCounter++
             });
 
-            // Smoother entry (duration 0.5s)
             gsap.timeline()
                 .to(img, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" })
                 .to(img, { opacity: 0, scale: 0.92, duration: 0.4, ease: "power3.out" }, `+=${holdTime}`);
