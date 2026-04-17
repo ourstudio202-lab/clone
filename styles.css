@@ -270,14 +270,14 @@ section {
     font-size: clamp(5rem, 12vw, 160px);
     font-weight: 400;
     /* Shifted left by 25px */
-    transform: translateX(-25px); 
+    transform: translateX(-40px); 
 }
 
 .hero-title .line-2 {
     font-size: clamp(2.5rem, 5vw, 70px);
     font-weight: 400;
     /* Reduced margin by 10px to pull the leading tighter */
-    margin: 10px 0; 
+    margin: 15px 0; 
     /* Kept exactly as it was */
     transform: translateX(10px); 
     z-index: 2;
@@ -287,5 +287,5 @@ section {
     font-size: clamp(5rem, 12vw, 160px);
     font-weight: 400;
     /* Shifted right by 25px */
-    transform: translateX(25px); 
+    transform: translateX(40px); 
 }
