@@ -243,8 +243,6 @@ section {
     justify-content: center;
     align-items: center;
     background-color: var(--bg-primary);
-    /* Ensures a minimum of 20px padding on smaller screens, 
-       while maintaining fluid side margins on larger screens */
     padding: 0 max(20px, var(--padding-x));
 }
 
@@ -255,24 +253,23 @@ section {
     align-items: center;
     color: var(--text-primary);
     text-align: center;
-    /* Opens up the text to feel more balanced and editorial */
     line-height: 1.05; 
 }
 
 .hero-title .line-1,
 .hero-title .line-3 {
-    /* Reduced font size, maxing out at 100px */
-    font-size: clamp(4rem, 8vw, 100px);
+    /* Increased: maxing out at 150px now */
+    font-size: clamp(5rem, 12vw, 150px);
     font-weight: 400;
 }
 
 .hero-title .line-2 {
-    /* Reduced font size, maxing out at 40px */
-    font-size: clamp(2rem, 4vw, 40px);
+    /* Increased: maxing out at 60px now */
+    font-size: clamp(2.5rem, 5vw, 60px);
     font-weight: 400;
-    /* Increased vertical spacing around the connecting word */
-    margin: 20px 0; 
-    /* Optical alignment shift */
+    /* Adjusted vertical spacing to balance the larger text */
+    margin: 25px 0; 
+    /* Optical alignment shift kept intact */
     transform: translateX(10px); 
     z-index: 2;
 }
