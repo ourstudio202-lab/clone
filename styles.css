@@ -322,7 +322,7 @@ section {
 
 .works-container {
     /* Widened container for a full-width, dominant feel */
-    max-width: 1400px;
+    max-width: 1800px;
     margin: 0 auto;
     /* Locks horizontal padding between 40px and 60px */
     padding: 0 clamp(40px, 5vw, 60px);
@@ -389,7 +389,7 @@ section {
 .work-image-wrapper {
     width: 100%;
     /* Forces the images to be massive (scaling between 450px and 520px) */
-    height: clamp(450px, 40vw, 520px); 
+    height: clamp(500px, 45vw, 700px); 
     overflow: hidden;
     background-color: var(--bg-secondary);
 }
