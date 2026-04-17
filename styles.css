@@ -79,14 +79,19 @@ section {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100;
-    transition: all 0.4s ease-in-out;
+    /* INCREASED: Massive z-index ensures no GSAP images can ever overlap it */
+    z-index: 99999; 
+    
+    /* FIXED: Removed "all" to stop fighting with GSAP fade-in animation. 
+       Now it ONLY transitions the background on scroll. */
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+    
     background: transparent;
     border-bottom: 1px solid transparent;
 }
 
 .site-header.scrolled {
-    background: rgba(10, 10, 10, 0.7); 
+    background-color: rgba(10, 10, 10, 0.7); 
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -108,8 +113,8 @@ section {
 
 .nav-logo {
     font-size: 1.25rem;
-    font-weight: 600; /* Bumped up to keep it crisp */
-    color: #ffffff; /* Forced pure white */
+    font-weight: 600;
+    color: #ffffff; /* Guaranteed Pure White */
     text-decoration: none;
     letter-spacing: -0.02em;
 }
@@ -119,24 +124,25 @@ section {
     gap: 2.5rem;
 }
 
-/* Base link state: 100% Bright White */
+/* Base link state */
 .nav-links a {
-    color: #ffffff; 
+    color: #ffffff; /* Guaranteed Pure White */
     text-decoration: none;
     font-size: 1rem;
     font-weight: 400;
-    opacity: 1; /* FIXED: Restored full brightness */
+    opacity: 1; /* Resetting to 100% visible */
     transition: opacity 0.3s ease;
 }
 
-/* Hover state: Fades to 60% */
+/* Hover state: fades slightly when you mouse over it */
 .nav-links a:hover {
     opacity: 0.6;
 }
 
-/* Active link state: Bolder text to indicate current page */
+/* Active page indicator */
 .nav-links a.active {
-    font-weight: 600; 
+    font-weight: 600;
+    opacity: 1;
 }
 /* ==========================================
    5. Global Footer
