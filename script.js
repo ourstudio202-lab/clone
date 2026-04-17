@@ -13,10 +13,8 @@ if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM loaded. Initializing scripts...");
     
-    // Run global interactions (Navbar & Footer)
     initGlobalInteractions();
 
-    // Route to correct page logic
     const currentPath = window.location.pathname.toLowerCase();
 
     if (currentPath.includes("work")) {
@@ -36,23 +34,18 @@ document.addEventListener("DOMContentLoaded", () => {
 function initGlobalInteractions() {
     const header = document.querySelector(".site-header");
     
-    if (!header) {
-        console.warn(".site-header missing from this HTML file.");
-        return; 
-    }
+    if (!header) return; 
 
-    // FASTER: Navbar Fade-in
     if (typeof gsap !== "undefined") {
         gsap.from(header, {
             y: -20,
             opacity: 0,
-            duration: 0.8,     // Sped up from 1.2s
+            duration: 0.8,     
             ease: "power3.out",
-            delay: 0.1         // Reduced delay from 0.3s
+            delay: 0.1         
         });
     }
 
-    // Navbar Scroll Effect
     window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {
             header.classList.add("scrolled");
@@ -79,24 +72,21 @@ function initHomePage() {
 
     const introTl = gsap.timeline();
 
-    // FASTER: Subtle overall hero fade-in
     introTl.from(heroSection, { 
         opacity: 0, 
-        duration: 0.4,         // Sped up from 0.5s
+        duration: 0.4,         
         ease: "power2.out" 
     })
-    // FASTER: Staggered text entrance
     .from(textLines, {
         y: 40,
         opacity: 0,
-        duration: 0.6,         // Sped up from 0.8s
+        duration: 0.6,         
         ease: "power3.out",
-        stagger: 0.1           // Tighter stagger from 0.15s
-    }, "-=0.3")                // Overlaps the background fade earlier
-    // FASTER: Unlock interaction quickly
+        stagger: 0.1           
+    }, "-=0.3")                
     .call(() => {
         interactionEnabled = true;
-    }, null, "+=0.1");         // Reduced delay from 0.3s to 0.1s
+    }, null, "+=0.1");         
 
 
     // --- IMAGE POP INTERACTION ---
@@ -176,16 +166,33 @@ function initHomePage() {
         lastY = 0;
         activeImage = null;
     });
+
+    // --- SCROLL ANIMATIONS (SELECTED WORKS) ---
+    
+    gsap.from(".works-header", {
+        scrollTrigger: {
+            trigger: ".selected-works",
+            start: "top 80%", 
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out"
+    });
+
+    gsap.from(".work-card", {
+        scrollTrigger: {
+            trigger: ".works-grid",
+            start: "top 85%",
+        },
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15, 
+        ease: "power3.out"
+    });
 }
 
-function initWorkPage() {
-    console.log("Work page logic loaded.");
-}
-
-function initAboutPage() {
-    console.log("About page logic loaded.");
-}
-
-function initContactPage() {
-    console.log("Contact page logic loaded.");
-}
+function initWorkPage() { console.log("Work page logic loaded."); }
+function initAboutPage() { console.log("About page logic loaded."); }
+function initContactPage() { console.log("Contact page logic loaded."); }
