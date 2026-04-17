@@ -279,7 +279,7 @@ section {
     /* MODIFIED: Moves "with" down by a precise 15px 
        while keeping the existing 10px right shift intact. 
        Adjust the 15px value if you want it further down or higher up. */
-    transform: translateX(10px) translateY(15px); 
+    transform: translateX(10px) translateY(18px); 
     
     z-index: 2;
 }
