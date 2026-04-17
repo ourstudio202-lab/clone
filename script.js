@@ -163,16 +163,19 @@ function initHomePage() {
         activeImage = null;
     });
 
-    // --- SCROLL ANIMATIONS (HERO OVERLAP & FADE) ---
-    gsap.to(".hero-section", {
+   // --- SCROLL ANIMATIONS (HERO OVERLAP & MOTION) ---
+    // Targeting the inner content creates a deep 3D falling effect
+    // without breaking the sticky layout of the parent container.
+    gsap.to([".hero-content", ".hero-pop-images"], {
         scrollTrigger: {
             trigger: ".selected-works",
             start: "top bottom", 
             end: "top top",      
             scrub: true          
         },
-        scale: 0.96,
-        // FIXED: Removed opacity fade entirely. Only scales down slightly.
+        scale: 0.80,       // Visibly shrinks to 80% of its size from the center
+        y: -40,            // Pushes it slightly upward to enhance the feeling of motion
+        opacity: 0.6,      // A very subtle dim (not a full fade) to push it to the background
         ease: "none"
     });
 
