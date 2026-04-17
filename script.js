@@ -76,10 +76,11 @@ function initHomePage() {
     let currentIndex = 0;
     let lastX = 0;
     let lastY = 0;
-    let activeImage = null; 
+    let activeImage = null; // Tracks the currently visible image to prevent overlap
     let zIndexCounter = 1;  
 
-    const minDistance = 150; 
+    // INCREASED DISTANCE: Mouse must now move 250 pixels before a new image appears
+    const minDistance = 250; 
 
     heroSection.addEventListener("mousemove", (e) => {
         if (lastX === 0 && lastY === 0) {
@@ -98,6 +99,7 @@ function initHomePage() {
 
             const img = popImages[currentIndex];
 
+            // NO OVERLAP RULE: Force the previous image to fade out instantly
             if (activeImage && activeImage !== img) {
                 gsap.to(activeImage, { 
                     opacity: 0, 
@@ -110,26 +112,37 @@ function initHomePage() {
             gsap.killTweensOf(img);
 
             const rect = heroSection.getBoundingClientRect();
-            const xPos = e.clientX - rect.left + 20;
-            const yPos = e.clientY - rect.top + 20;
+            
+            // RANDOMIZED SCATTER: Shifts image between -80px and +80px from cursor
+            const randomOffsetX = gsap.utils.random(-80, 80);
+            const randomOffsetY = gsap.utils.random(-80, 80);
+            
+            const xPos = (e.clientX - rect.left) + randomOffsetX - 120; 
+            const yPos = (e.clientY - rect.top) + randomOffsetY - 180; 
+
+            // RANDOMIZED TILT: Rotates image between -25 and +25 degrees
+            const randomRotation = gsap.utils.random(-25, 25);
 
             gsap.set(img, {
                 x: xPos,
                 y: yPos,
-                scale: 0.9,
+                rotation: randomRotation, 
+                scale: 0.8,
                 opacity: 0,
                 zIndex: zIndexCounter++
             });
 
+            // ANIMATION: Smooth pop in, hold, then fade out
             gsap.timeline()
-                .to(img, { opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" })
-                .to(img, { opacity: 0, scale: 0.95, duration: 0.4, ease: "power2.inOut" }, "+=0.6");
+                .to(img, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" })
+                .to(img, { opacity: 0, scale: 0.95, duration: 0.5, ease: "power2.inOut" }, "+=1.0");
 
             activeImage = img;
             currentIndex = (currentIndex + 1) % popImages.length;
         }
     });
 
+    // Clean up completely if the mouse leaves the hero section
     heroSection.addEventListener("mouseleave", () => {
         gsap.to(popImages, { opacity: 0, scale: 0.95, duration: 0.4, overwrite: "auto" });
         lastX = 0; 
