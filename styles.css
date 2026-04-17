@@ -71,78 +71,33 @@ section {
     position: relative;
 }
 
-/* ==========================================
-   4. Global Navigation
-   ========================================== */
-.site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    /* INCREASED: Massive z-index ensures no GSAP images can ever overlap it */
-    z-index: 99999; 
-    
-    /* FIXED: Removed "all" to stop fighting with GSAP fade-in animation. 
-       Now it ONLY transitions the background on scroll. */
-    transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
-    
-    background: transparent;
-    border-bottom: 1px solid transparent;
-}
-
-.site-header.scrolled {
-    background-color: rgba(10, 10, 10, 0.7); 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2.5rem var(--padding-x);
-    transition: padding 0.4s ease-in-out;
-    max-width: var(--container-max-width);
-    margin: 0 auto;
-}
-
-.site-header.scrolled .navbar {
-    padding: 1.25rem var(--padding-x);
-}
-
-.nav-logo {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #ffffff; /* Guaranteed Pure White */
-    text-decoration: none;
-    letter-spacing: -0.02em;
-}
-
+/* --- Navigation Links --- */
 .nav-links {
     display: flex;
     gap: 2.5rem;
 }
 
-/* Base link state */
+/* Base link state: 100% Bright White */
 .nav-links a {
-    color: #ffffff; /* Guaranteed Pure White */
+    color: #ffffff; 
     text-decoration: none;
     font-size: 1rem;
     font-weight: 400;
-    opacity: 1; /* Resetting to 100% visible */
+    opacity: 1; 
     transition: opacity 0.3s ease;
 }
 
-/* Hover state: fades slightly when you mouse over it */
+/* Hover state: Fades all inactive links to 60% smoothly */
 .nav-links a:hover {
     opacity: 0.6;
 }
 
-/* Active page indicator */
+/* Active page indicator: Settled at 70% opacity */
 .nav-links a.active {
-    font-weight: 600;
-    opacity: 1;
+    opacity: 0.7;
+    font-weight: 500; /* Subtle bump in weight to ground it */
+    pointer-events: none; /* Premium touch: disables hover effect on the page you are already on */
+    cursor: default;
 }
 /* ==========================================
    5. Global Footer
