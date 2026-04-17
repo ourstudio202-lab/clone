@@ -200,6 +200,30 @@ function initHomePage() {
         stagger: 0.15, 
         ease: "power3.out"
     });
+
+    // --- SCROLL ANIMATIONS (SERVICES) ---
+    gsap.from(".services-header", {
+        scrollTrigger: {
+            trigger: ".services-section",
+            start: "top 85%", 
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out"
+    });
+
+    gsap.from(".service-card", {
+        scrollTrigger: {
+            trigger: ".services-grid",
+            start: "top 85%",
+        },
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1, // Faster stagger since there are 6 cards
+        ease: "power3.out"
+    });
 }
 
 function initWorkPage() { console.log("Work page logic loaded."); }
