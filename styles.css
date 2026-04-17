@@ -30,7 +30,7 @@
 
 html {
     font-size: 16px;
-    scroll-behavior: auto; /* GSAP handles smooth scrolling */
+    scroll-behavior: auto;
 }
 
 body {
@@ -71,7 +71,49 @@ section {
     position: relative;
 }
 
-/* --- Navigation Links --- */
+/* ==========================================
+   4. Global Navigation
+   ========================================== */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999; 
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+}
+
+.site-header.scrolled {
+    background-color: rgba(10, 10, 10, 0.7); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem var(--padding-x);
+    transition: padding 0.4s ease-in-out;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+.site-header.scrolled .navbar {
+    padding: 1.25rem var(--padding-x);
+}
+
+.nav-logo {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffffff; 
+    text-decoration: none;
+    letter-spacing: -0.02em;
+}
+
 .nav-links {
     display: flex;
     gap: 2.5rem;
@@ -95,10 +137,11 @@ section {
 /* Active page indicator: Settled at 70% opacity */
 .nav-links a.active {
     opacity: 0.7;
-    font-weight: 500; /* Subtle bump in weight to ground it */
-    pointer-events: none; /* Premium touch: disables hover effect on the page you are already on */
+    font-weight: 500; 
+    pointer-events: none; 
     cursor: default;
 }
+
 /* ==========================================
    5. Global Footer
    ========================================== */
