@@ -29,8 +29,7 @@
 
 html {
     font-size: 16px;
-    /* GSAP handles smooth scrolling, so we keep this auto */
-    scroll-behavior: auto; 
+    scroll-behavior: auto; /* GSAP handles smooth scrolling */
 }
 
 body {
@@ -38,16 +37,11 @@ body {
     color: var(--text-primary);
     font-family: var(--font-primary);
     line-height: 1.5;
-    
-    /* Crisp typography rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
-    /* Prevent horizontal scroll issues during animations */
     overflow-x: hidden; 
 }
 
-/* Make media elements behave responsively */
 img, picture, video, canvas, svg {
     display: block;
     max-width: 100%;
@@ -62,7 +56,6 @@ main {
     position: relative;
 }
 
-/* Container for constraining max width on larger screens */
 .container {
     width: 100%;
     max-width: var(--container-max-width);
@@ -70,10 +63,166 @@ main {
     padding: 0 var(--padding-x);
 }
 
-/* Basic section setup */
 section {
     width: 100%;
     min-height: 100vh;
     padding: var(--section-padding-y) 0;
     position: relative;
+}
+
+/* ==========================================
+   4. Global Navigation
+   ========================================== */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    transition: all 0.4s ease-in-out;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+}
+
+.site-header.scrolled {
+    background: rgba(10, 10, 10, 0.7); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem var(--padding-x);
+    transition: padding 0.4s ease-in-out;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+.site-header.scrolled .navbar {
+    padding: 1.25rem var(--padding-x);
+}
+
+.nav-logo {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover {
+    opacity: 0.6;
+}
+
+/* ==========================================
+   5. Global Footer
+   ========================================== */
+.site-footer {
+    background-color: #1a1a1a; 
+    padding: 8rem var(--padding-x) 6rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.footer-heading {
+    font-size: 5.5rem;
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.btn-outline {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-bottom: 0.5rem; 
+}
+
+.footer-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-contact-info p {
+    font-size: 1.1rem;
+    color: #e5e5e5;
+    letter-spacing: 0.02em;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 1.25rem;
+}
+
+.social-circle {
+    width: 45px;
+    height: 45px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+    display: block;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.social-circle:hover {
+    transform: scale(1.05);
+    background-color: #ffffff;
+}
+
+@media (max-width: 900px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4rem;
+    }
+    .footer-heading {
+        font-size: 3.5rem;
+    }
 }
