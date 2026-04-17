@@ -555,7 +555,8 @@ section {
 }
 
 .service-details {
-    margin-top: auto; 
+    /* FIXED: Removed auto margin, changed to 15px to sit right below the heading */
+    margin-top: 15px; 
     opacity: 0;
     transform: translateY(20px); 
     transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
