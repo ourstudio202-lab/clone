@@ -261,7 +261,6 @@ section {
     align-items: center;
     color: var(--text-primary);
     text-align: center;
-    /* Tightened leading */
     line-height: 1.0; 
     transform: translateX(0); 
 }
@@ -269,23 +268,26 @@ section {
 .hero-title .line-1 {
     font-size: clamp(5rem, 12vw, 160px);
     font-weight: 400;
-    /* Shifted left by 25px */
-    transform: translateX(-40px); 
+    transform: translateX(-40px); /* Your left shift */
 }
 
 .hero-title .line-2 {
     font-size: clamp(2.5rem, 5vw, 70px);
     font-weight: 400;
-    /* Reduced margin by 10px to pull the leading tighter */
     margin: 15px 0; 
-    /* Kept exactly as it was */
-    transform: translateX(10px); 
+    
+    /* MODIFIED: Moves "with" down by a precise 15px 
+       while keeping the existing 10px right shift intact. 
+       Adjust the 15px value if you want it further down or higher up. */
+    transform: translateX(10px) translateY(15px); 
+    
     z-index: 2;
 }
 
 .hero-title .line-3 {
     font-size: clamp(5rem, 12vw, 160px);
     font-weight: 400;
-    /* Shifted right by 25px */
+    
+    /* KEPT: Exactly as it was */
     transform: translateX(40px); 
 }
