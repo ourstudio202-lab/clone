@@ -1,1 +1,79 @@
+/* ==========================================
+   1. Design System Variables
+   ========================================== */
+:root {
+    /* Color Palette - Minimal & Cinematic Base */
+    --bg-primary: #0a0a0a; 
+    --bg-secondary: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #a3a3a3;
+    --accent-color: #ffffff;
 
+    /* Typography */
+    --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    /* Layout & Spacing */
+    --container-max-width: 1440px;
+    --padding-x: 5vw;
+    --section-padding-y: 10vh;
+}
+
+/* ==========================================
+   2. Modern CSS Reset
+   ========================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    /* GSAP handles smooth scrolling, so we keep this auto */
+    scroll-behavior: auto; 
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    line-height: 1.5;
+    
+    /* Crisp typography rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* Prevent horizontal scroll issues during animations */
+    overflow-x: hidden; 
+}
+
+/* Make media elements behave responsively */
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* ==========================================
+   3. Base Layout Utilities
+   ========================================== */
+main {
+    width: 100%;
+    position: relative;
+}
+
+/* Container for constraining max width on larger screens */
+.container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--padding-x);
+}
+
+/* Basic section setup */
+section {
+    width: 100%;
+    min-height: 100vh;
+    padding: var(--section-padding-y) 0;
+    position: relative;
+}
