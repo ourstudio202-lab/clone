@@ -72,18 +72,14 @@ function initHomePage() {
 
     const introTl = gsap.timeline();
 
-    introTl.from(heroSection, { 
-        opacity: 0, 
-        duration: 0.4,         
-        ease: "power2.out" 
-    })
-    .from(textLines, {
+    // FIXED: Removed opacity fade from hero section entirely. It is fully visible instantly.
+    introTl.from(textLines, {
         y: 40,
         opacity: 0,
         duration: 0.6,         
         ease: "power3.out",
         stagger: 0.1           
-    }, "-=0.3")                
+    })                
     .call(() => {
         interactionEnabled = true;
     }, null, "+=0.1");         
@@ -175,8 +171,8 @@ function initHomePage() {
             end: "top top",      
             scrub: true          
         },
-        scale: 0.96,       
-        opacity: 0.3,      
+        scale: 0.96,
+        // FIXED: Removed opacity fade entirely. Only scales down slightly.
         ease: "none"
     });
 
