@@ -11,6 +11,7 @@
 
     /* Typography */
     --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: "Sarina", cursive;
     
     /* Layout & Spacing */
     --container-max-width: 1440px;
@@ -118,7 +119,6 @@ section {
     gap: 2.5rem;
 }
 
-/* Base link state (inactive) */
 .nav-links a {
     color: var(--text-primary);
     text-decoration: none;
@@ -132,7 +132,6 @@ section {
     opacity: 1;
 }
 
-/* Active link state */
 .nav-links a.active {
     opacity: 1;
     font-weight: 500;
@@ -233,4 +232,41 @@ section {
     .footer-heading {
         font-size: 3.5rem;
     }
+}
+
+/* ==========================================
+   6. Home Page - Hero Section
+   ========================================== */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-primary);
+    padding: 0 var(--padding-x);
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+/* Fluid typography for scalable, massive text */
+.hero-title .line-1,
+.hero-title .line-3 {
+    font-size: clamp(6rem, 15vw, 15rem);
+    line-height: 0.7; /* Tightens the vertical space */
+    font-weight: 400;
+}
+
+.hero-title .line-2 {
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    line-height: 1;
+    font-weight: 400;
+    margin: -1rem 0 -0.5rem 0; /* Pulls "with" tight against the other lines */
+    z-index: 2;
 }
