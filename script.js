@@ -1,25 +1,30 @@
 // ==========================================
-// 1. GSAP Registration
+// 1. GSAP Registration (With Safety Check)
 // ==========================================
-gsap.registerPlugin(ScrollTrigger);
+// This prevents errors if the CDN loads slowly
+if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+} else {
+    console.error("GSAP or ScrollTrigger failed to load. Check your internet connection or CDN links.");
+}
 
 // ==========================================
 // 2. Initialization & Routing
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("System initialized. GSAP & ScrollTrigger ready.");
+    console.log("DOM loaded. Initializing scripts...");
     
     // Run global interactions (Navbar & Footer)
     initGlobalInteractions();
 
-    // Route to correct page logic
-    const currentPath = window.location.pathname;
+    // Route to correct page logic (Simplified the string check for GitHub Pages compatibility)
+    const currentPath = window.location.pathname.toLowerCase();
 
-    if (currentPath.includes("work.html")) {
+    if (currentPath.includes("work")) {
         initWorkPage();
-    } else if (currentPath.includes("about.html")) {
+    } else if (currentPath.includes("about")) {
         initAboutPage();
-    } else if (currentPath.includes("contact.html")) {
+    } else if (currentPath.includes("contact")) {
         initContactPage();
     } else {
         initHomePage();
@@ -30,17 +35,26 @@ document.addEventListener("DOMContentLoaded", () => {
 // 3. Global Functions
 // ==========================================
 function initGlobalInteractions() {
+    const header = document.querySelector(".site-header");
+    
+    // Defensive check: If header doesn't exist on the page, stop the function to prevent errors
+    if (!header) {
+        console.warn(".site-header missing from this HTML file.");
+        return; 
+    }
+
     // Navbar Fade-in
-    gsap.from(".site-header", {
-        y: -20,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power3.out",
-        delay: 0.1
-    });
+    if (typeof gsap !== "undefined") {
+        gsap.from(header, {
+            y: -20,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            delay: 0.1
+        });
+    }
 
     // Navbar Scroll Effect
-    const header = document.querySelector(".site-header");
     window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {
             header.classList.add("scrolled");
