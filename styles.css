@@ -455,27 +455,28 @@ section {
    ========================================== */
 .services-section {
     position: relative;
-    z-index: 2; /* Keeps it layered correctly over the hero */
-    padding-bottom: 160px; /* Only bottom padding needed since it sits below Works */
+    z-index: 2; 
+    padding-bottom: 160px; 
     background-color: var(--bg-primary);
 }
 
+/* The heading is perfectly spaced using the same class as the Works section */
 .services-header {
-    /* Reuses the exact 40px margin-bottom from Selected Works */
     justify-content: flex-start;
+    margin-bottom: 40px;
 }
 
 .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px; /* Tight 3-column spacing */
+    gap: 30px; 
 }
 
 .service-card {
     position: relative;
-    /* Aspect ratio for tall, elegant portrait cards */
     aspect-ratio: 3 / 4; 
-    border-radius: 4px;
+    /* FIXED: Removed roundness completely for sharp, brutalist edges */
+    border-radius: 0; 
     overflow: hidden;
     cursor: pointer;
     background-color: var(--bg-secondary);
@@ -492,14 +493,13 @@ section {
     z-index: 1;
 }
 
-/* The dark overlay that fades in on hover */
 .service-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(10, 10, 10, 0.85); /* Deep dark overlay */
+    background-color: rgba(10, 10, 10, 0.85); 
     opacity: 0;
     transition: opacity 0.5s ease;
     z-index: 2;
@@ -507,7 +507,7 @@ section {
 
 .service-content {
     position: relative;
-    z-index: 3; /* Places text on top of the overlay */
+    z-index: 3; 
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -527,7 +527,7 @@ section {
     margin: 0;
 }
 
-/* The Plus/Minus Icon System */
+/* --- THE ICON SYSTEM --- */
 .service-icon {
     position: relative;
     width: 20px;
@@ -535,13 +535,13 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Adds a 90deg twist on hover */
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .line-h, .line-v {
     position: absolute;
     background-color: var(--text-primary);
+    transition: opacity 0.3s ease; /* Added transition to both for smooth fading */
 }
 
 .line-h {
@@ -552,14 +552,12 @@ section {
 .line-v {
     width: 2px;
     height: 100%;
-    transition: opacity 0.3s ease;
 }
 
-/* The Text that appears on hover */
 .service-details {
-    margin-top: auto; /* Pushes the text to the absolute bottom of the card */
+    margin-top: auto; 
     opacity: 0;
-    transform: translateY(20px); /* Starts slightly lower */
+    transform: translateY(20px); 
     transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -571,25 +569,29 @@ section {
 
 /* --- THE HOVER INTERACTIONS --- */
 .service-card:hover .service-bg {
-    transform: scale(1.05); /* Slight zoom on the background */
+    transform: scale(1.05); 
 }
 
 .service-card:hover .service-overlay {
-    opacity: 1; /* Dark overlay appears */
-}
-
-.service-card:hover .service-icon {
-    transform: rotate(90deg); /* Twists the icon */
-}
-
-.service-card:hover .line-v {
-    opacity: 0; /* Vertical line vanishes, leaving a minus */
+    opacity: 1; 
 }
 
 .service-card:hover .service-details {
     opacity: 1;
-    transform: translateY(0); /* Text floats up into place */
+    transform: translateY(0); 
 }
+
+/* THE ICON FIX: We rotate the container 90 degrees. 
+   Because of the rotation, the vertical line falls flat to become horizontal. 
+   So we simply fade out the original horizontal line! */
+.service-card:hover .service-icon {
+    transform: rotate(90deg); 
+}
+
+.service-card:hover .line-h {
+    opacity: 0; 
+}
+
 
 /* --- Mobile / Tablet Adjustments --- */
 @media (max-width: 1100px) {
@@ -605,6 +607,6 @@ section {
     }
     
     .service-card {
-        aspect-ratio: 4 / 3; /* Makes them landscape on small phones so they aren't awkwardly tall */
+        aspect-ratio: 4 / 3; 
     }
 }
