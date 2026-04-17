@@ -76,7 +76,8 @@ section {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 99999; 
+    /* FIXED: Lowered to 1000 per instructions */
+    z-index: 1000; 
     transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
     background: transparent;
     border-bottom: 1px solid transparent;
@@ -140,7 +141,10 @@ section {
    5. Global Footer
    ========================================== */
 .site-footer {
-    background-color: #1a1a1a; 
+    /* FIXED: Ensured footer sits on layer 2 to cover the sticky hero */
+    position: relative;
+    z-index: 2;
+    background-color: var(--bg-secondary); 
     padding: 8rem var(--padding-x) 6rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -245,7 +249,7 @@ section {
     background-color: var(--bg-primary);
     padding: 0 max(20px, var(--padding-x));
     
-    /* Sticky overap effect */
+    /* FIXED: Sticky baseline locked to Layer 1 */
     position: sticky;
     top: 0;
     z-index: 1;
@@ -318,14 +322,14 @@ section {
    7. Home Page - Selected Works
    ========================================== */
 .selected-works {
-    /* Layers perfectly over the sticky hero */
+    /* FIXED: Layer 2 completely covers Layer 1 (Hero) */
     position: relative;
     z-index: 2;
     margin-top: 0;
+    background-color: var(--bg-primary);
     
     padding-top: 160px; 
     padding-bottom: 160px;
-    background-color: var(--bg-primary);
     min-height: auto; 
 }
 
