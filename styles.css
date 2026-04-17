@@ -374,7 +374,7 @@ section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     /* Generous, perfectly even 80px spacing */
-    column-gap: 25px; row-gap: 40px;
+    column-gap: 25px; row-gap: 50px;
 }
 
 .work-card {
