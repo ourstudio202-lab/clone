@@ -67,6 +67,75 @@ function initGlobalInteractions() {
 // ==========================================
 function initHomePage() {
     console.log("Home page logic loaded.");
+
+    const heroSection = document.querySelector(".hero-section");
+    const popImages = document.querySelectorAll(".hero-pop-images img");
+
+    if (!heroSection || popImages.length === 0) return;
+
+    let currentIndex = 0;
+    let lastX = 0;
+    let lastY = 0;
+    let activeImage = null; 
+    let zIndexCounter = 1;  
+
+    const minDistance = 150; 
+
+    heroSection.addEventListener("mousemove", (e) => {
+        if (lastX === 0 && lastY === 0) {
+            lastX = e.clientX;
+            lastY = e.clientY;
+            return;
+        }
+
+        const deltaX = e.clientX - lastX;
+        const deltaY = e.clientY - lastY;
+        const distance = Math.hypot(deltaX, deltaY);
+
+        if (distance > minDistance) {
+            lastX = e.clientX;
+            lastY = e.clientY;
+
+            const img = popImages[currentIndex];
+
+            if (activeImage && activeImage !== img) {
+                gsap.to(activeImage, { 
+                    opacity: 0, 
+                    scale: 0.95, 
+                    duration: 0.4, 
+                    overwrite: "auto" 
+                });
+            }
+
+            gsap.killTweensOf(img);
+
+            const rect = heroSection.getBoundingClientRect();
+            const xPos = e.clientX - rect.left + 20;
+            const yPos = e.clientY - rect.top + 20;
+
+            gsap.set(img, {
+                x: xPos,
+                y: yPos,
+                scale: 0.9,
+                opacity: 0,
+                zIndex: zIndexCounter++
+            });
+
+            gsap.timeline()
+                .to(img, { opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" })
+                .to(img, { opacity: 0, scale: 0.95, duration: 0.4, ease: "power2.inOut" }, "+=0.6");
+
+            activeImage = img;
+            currentIndex = (currentIndex + 1) % popImages.length;
+        }
+    });
+
+    heroSection.addEventListener("mouseleave", () => {
+        gsap.to(popImages, { opacity: 0, scale: 0.95, duration: 0.4, overwrite: "auto" });
+        lastX = 0; 
+        lastY = 0;
+        activeImage = null;
+    });
 }
 
 function initWorkPage() {
