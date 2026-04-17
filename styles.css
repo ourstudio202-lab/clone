@@ -262,7 +262,7 @@ section {
     color: var(--text-primary);
     text-align: center;
     line-height: 1.0; 
-    transform: translateX(0); 
+    transform: translateY(25px); 
 }
 
 .hero-title .line-1 {
