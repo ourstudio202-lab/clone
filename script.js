@@ -1,7 +1,6 @@
 // ==========================================
 // 1. GSAP Registration (With Safety Check)
 // ==========================================
-// This prevents errors if the CDN loads slowly
 if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
 } else {
@@ -17,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Run global interactions (Navbar & Footer)
     initGlobalInteractions();
 
-    // Route to correct page logic (Simplified the string check for GitHub Pages compatibility)
+    // Route to correct page logic
     const currentPath = window.location.pathname.toLowerCase();
 
     if (currentPath.includes("work")) {
@@ -37,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function initGlobalInteractions() {
     const header = document.querySelector(".site-header");
     
-    // Defensive check: If header doesn't exist on the page, stop the function to prevent errors
     if (!header) {
         console.warn(".site-header missing from this HTML file.");
         return; 
