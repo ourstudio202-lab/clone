@@ -374,7 +374,7 @@ section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     /* Generous, perfectly even 80px spacing */
-    gap: 40px; 
+    column-gap: 25px; row-gap: 40px;
 }
 
 .work-card {
@@ -408,7 +408,7 @@ section {
 }
 
 .work-info h3 {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 500;
     color: var(--text-primary);
     margin-bottom: 4px;
@@ -416,7 +416,7 @@ section {
 }
 
 .work-info p {
-    font-size: 1rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
 }
 
