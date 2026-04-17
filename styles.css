@@ -408,7 +408,7 @@ section {
 }
 
 .work-info h3 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 500;
     color: var(--text-primary);
     margin-bottom: 4px;
@@ -416,7 +416,7 @@ section {
 }
 
 .work-info p {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: var(--text-secondary);
 }
 
