@@ -163,9 +163,7 @@ function initHomePage() {
         activeImage = null;
     });
 
-   // --- SCROLL ANIMATIONS (HERO OVERLAP & MOTION) ---
-    // Targeting the inner content creates a deep 3D falling effect
-    // without breaking the sticky layout of the parent container.
+  // --- SCROLL ANIMATIONS (HERO OVERLAP & MOTION) ---
     gsap.to([".hero-content", ".hero-pop-images"], {
         scrollTrigger: {
             trigger: ".selected-works",
@@ -173,9 +171,9 @@ function initHomePage() {
             end: "top top",      
             scrub: true          
         },
-        scale: 0.80,       // Visibly shrinks to 80% of its size from the center
-        y: -40,            // Pushes it slightly upward to enhance the feeling of motion
-        opacity: 0.6,      // A very subtle dim (not a full fade) to push it to the background
+        scale: 0.70,       // CHANGED: Shrinks much smaller now (down to 70%)
+        y: -60,            // CHANGED: Pushes slightly higher up for more depth
+        opacity: 0.2,      // CHANGED: Fades out heavily into the background
         ease: "none"
     });
 
