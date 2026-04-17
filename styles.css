@@ -244,7 +244,12 @@ section {
     align-items: center;
     background-color: var(--bg-primary);
     padding: 0 max(20px, var(--padding-x));
-    position: relative; 
+    
+    /* Sticky overap effect */
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    transform-origin: center center;
     overflow: hidden; 
 }
 
@@ -313,7 +318,11 @@ section {
    7. Home Page - Selected Works
    ========================================== */
 .selected-works {
-    /* Increased breathing room from the hero section */
+    /* Layers perfectly over the sticky hero */
+    position: relative;
+    z-index: 2;
+    margin-top: 0;
+    
     padding-top: 160px; 
     padding-bottom: 160px;
     background-color: var(--bg-primary);
@@ -321,10 +330,8 @@ section {
 }
 
 .works-container {
-    /* Widened container for a full-width, dominant feel */
     max-width: 1800px;
     margin: 0 auto;
-    /* Locks horizontal padding between 40px and 60px */
     padding: 0 clamp(40px, 5vw, 60px);
 }
 
@@ -332,7 +339,6 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    /* Increased space pushing the grid further down */
     margin-bottom: 40px; 
 }
 
@@ -373,7 +379,6 @@ section {
 .works-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* Generous, perfectly even 80px spacing */
     column-gap: 25px; row-gap: 50px;
 }
 
@@ -388,7 +393,6 @@ section {
 
 .work-image-wrapper {
     width: 100%;
-    /* Forces the images to be massive (scaling between 450px and 520px) */
     height: clamp(500px, 45vw, 700px); 
     overflow: hidden;
     background-color: var(--bg-secondary);
@@ -397,7 +401,6 @@ section {
 .work-image-wrapper img {
     width: 100%;
     height: 100%;
-    /* Guarantees images fill the massive wrapper without distorting */
     object-fit: cover; 
     transform: scale(1.0);
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -440,7 +443,6 @@ section {
     }
     
     .work-image-wrapper {
-        /* Prevents images from being absurdly tall on mobile phones */
         height: clamp(350px, 60vw, 450px);
     }
 }
