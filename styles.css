@@ -239,11 +239,20 @@ section {
    ========================================== */
 .hero-section {
     height: 100vh;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--bg-primary);
     padding: 0 max(20px, var(--padding-x));
+}
+
+.hero-content {
+    /* Explicitly centering the wrapper to guarantee layout alignment */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .hero-title {
@@ -253,23 +262,27 @@ section {
     align-items: center;
     color: var(--text-primary);
     text-align: center;
-    line-height: 1.05; 
+    line-height: 1.05; /* Kept leading exactly the same */
+    
+    /* Optical alignment: Script fonts lean right, which can make them 
+       feel left-heavy. If it STILL feels off-center, increase this 
+       translateX value slightly (e.g., 1vw or 20px) to nudge the whole block. */
+    transform: translateX(0); 
 }
 
 .hero-title .line-1,
 .hero-title .line-3 {
-    /* Increased: maxing out at 150px now */
-    font-size: clamp(5rem, 12vw, 150px);
+    /* Increased by 10px: now maxing out at 160px */
+    font-size: clamp(5rem, 12vw, 160px);
     font-weight: 400;
 }
 
 .hero-title .line-2 {
-    /* Increased: maxing out at 60px now */
-    font-size: clamp(2.5rem, 5vw, 60px);
+    /* Increased by 10px: now maxing out at 70px */
+    font-size: clamp(2.5rem, 5vw, 70px);
     font-weight: 400;
-    /* Adjusted vertical spacing to balance the larger text */
     margin: 25px 0; 
-    /* Optical alignment shift kept intact */
+    /* This keeps "with" aligned cleanly with the main text */
     transform: translateX(10px); 
     z-index: 2;
 }
