@@ -245,6 +245,29 @@ section {
     align-items: center;
     background-color: var(--bg-primary);
     padding: 0 max(20px, var(--padding-x));
+    position: relative; 
+    overflow: hidden; 
+}
+
+.hero-pop-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; 
+    z-index: 1;
+}
+
+.hero-pop-images img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: clamp(200px, 18vw, 320px); 
+    aspect-ratio: 3 / 4; 
+    object-fit: cover;
+    opacity: 0; 
+    border-radius: 4px; 
 }
 
 .hero-content {
@@ -252,6 +275,8 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 10;
 }
 
 .hero-title {
@@ -262,32 +287,25 @@ section {
     color: var(--text-primary);
     text-align: center;
     line-height: 1.0; 
-    transform: translateY(25px); 
+    transform: translateY(40px); 
 }
 
 .hero-title .line-1 {
     font-size: clamp(5rem, 12vw, 160px);
     font-weight: 400;
-    transform: translateX(-40px); /* Your left shift */
+    transform: translateX(-40px); 
 }
 
 .hero-title .line-2 {
     font-size: clamp(2.5rem, 5vw, 70px);
     font-weight: 400;
     margin: 15px 0; 
-    
-    /* MODIFIED: Moves "with" down by a precise 15px 
-       while keeping the existing 10px right shift intact. 
-       Adjust the 15px value if you want it further down or higher up. */
     transform: translateX(10px) translateY(18px); 
-    
     z-index: 2;
 }
 
 .hero-title .line-3 {
     font-size: clamp(5rem, 12vw, 160px);
     font-weight: 400;
-    
-    /* KEPT: Exactly as it was */
     transform: translateX(40px); 
 }
