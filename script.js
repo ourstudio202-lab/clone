@@ -41,14 +41,14 @@ function initGlobalInteractions() {
         return; 
     }
 
-    // Navbar Fade-in
+    // Navbar Fade-in (Slight delay to let page settle)
     if (typeof gsap !== "undefined") {
         gsap.from(header, {
             y: -20,
             opacity: 0,
             duration: 1.2,
             ease: "power3.out",
-            delay: 0.1
+            delay: 0.3 
         });
     }
 
@@ -70,19 +70,48 @@ function initHomePage() {
 
     const heroSection = document.querySelector(".hero-section");
     const popImages = document.querySelectorAll(".hero-pop-images img");
+    const textLines = document.querySelectorAll(".hero-title span"); // Target the 3 text lines
 
     if (!heroSection || popImages.length === 0) return;
 
+    // --- ENTRANCE ANIMATION & INTERACTION LOCK ---
+    let interactionEnabled = false; // Locks mouse interaction initially
+
+    const introTl = gsap.timeline();
+
+    // 1. Subtle overall hero fade-in
+    introTl.from(heroSection, { 
+        opacity: 0, 
+        duration: 0.5, 
+        ease: "power2.out" 
+    })
+    // 2. Staggered text entrance
+    .from(textLines, {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.15
+    }, "-=0.2") // Overlaps slightly with the hero fade-in for smoothness
+    // 3. Interaction Delay: Unlock mouse movement 0.3s after text finishes
+    .call(() => {
+        interactionEnabled = true;
+    }, null, "+=0.3");
+
+
+    // --- IMAGE POP INTERACTION ---
     let currentIndex = 0;
     let lastX = 0;
     let lastY = 0;
-    let activeImage = null; // Tracks the currently visible image to prevent overlap
+    let activeImage = null; 
     let zIndexCounter = 1;  
 
-    // REFINED SPAWN CONTROL: 180px threshold to prevent overly frequent triggers
     const minDistance = 180; 
 
     heroSection.addEventListener("mousemove", (e) => {
+        // Block interaction until the entrance timeline completes
+        if (!interactionEnabled) return;
+
         if (lastX === 0 && lastY === 0) {
             lastX = e.clientX;
             lastY = e.clientY;
@@ -99,13 +128,12 @@ function initHomePage() {
 
             const img = popImages[currentIndex];
 
-            // CLEAN TRANSITIONS: Smoothly fade out previous image
             if (activeImage && activeImage !== img) {
                 gsap.to(activeImage, { 
                     opacity: 0, 
-                    scale: 0.92, // Exit scale upgrade
+                    scale: 0.92, 
                     duration: 0.4, 
-                    ease: "power3.out", // Easing upgrade
+                    ease: "power3.out", 
                     overwrite: "auto" 
                 });
             }
@@ -114,33 +142,28 @@ function initHomePage() {
 
             const rect = heroSection.getBoundingClientRect();
             
-            // NATURAL POSITIONING: Subtle random offset (-30px to +30px)
             const randomOffsetX = gsap.utils.random(-30, 30);
             const randomOffsetY = gsap.utils.random(-30, 30);
             
-            // Center calculation + subtle random offset
             const xPos = (e.clientX - rect.left) - 120 + randomOffsetX; 
             const yPos = (e.clientY - rect.top) - 150 + randomOffsetY; 
 
-            // SUBTLE DEPTH: Very slight random rotation (-5deg to +5deg)
             const randomRotation = gsap.utils.random(-5, 5);
-
-            // TIMING VARIATION: Randomize hold duration between 0.5s to 0.8s
             const holdTime = gsap.utils.random(0.5, 0.8);
 
-            // Set initial state
+            // Updated softer start scale (0.9 instead of 0.85)
             gsap.set(img, {
                 x: xPos,
                 y: yPos,
                 rotation: randomRotation, 
-                scale: 0.85, // Entry scale upgrade
+                scale: 0.9, 
                 opacity: 0,
                 zIndex: zIndexCounter++
             });
 
-            // ENTRY & EXIT ANIMATIONS: Smooth power3.out easing
+            // Smoother entry (duration 0.5s)
             gsap.timeline()
-                .to(img, { opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" })
+                .to(img, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" })
                 .to(img, { opacity: 0, scale: 0.92, duration: 0.4, ease: "power3.out" }, `+=${holdTime}`);
 
             activeImage = img;
@@ -148,8 +171,9 @@ function initHomePage() {
         }
     });
 
-    // Clean up completely if the mouse leaves the hero section
     heroSection.addEventListener("mouseleave", () => {
+        if (!interactionEnabled) return;
+        
         gsap.to(popImages, { opacity: 0, scale: 0.92, duration: 0.4, ease: "power3.out", overwrite: "auto" });
         lastX = 0; 
         lastY = 0;
