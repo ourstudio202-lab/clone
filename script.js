@@ -178,7 +178,8 @@ function initHomePage() {
     });
 
     // --- SCROLL ANIMATIONS (SELECTED WORKS) ---
-    gsap.from(".works-header", {
+    // FIXED: Now strictly targets only the header inside .selected-works
+    gsap.from(".selected-works .works-header", {
         scrollTrigger: {
             trigger: ".selected-works",
             start: "top 80%", 
