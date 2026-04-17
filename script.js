@@ -79,8 +79,8 @@ function initHomePage() {
     let activeImage = null; // Tracks the currently visible image to prevent overlap
     let zIndexCounter = 1;  
 
-    // INCREASED DISTANCE: Mouse must now move 250 pixels before a new image appears
-    const minDistance = 250; 
+    // INCREASED DISTANCE: Mouse must now move 320 pixels before a new image appears
+    const minDistance = 320; 
 
     heroSection.addEventListener("mousemove", (e) => {
         if (lastX === 0 && lastY === 0) {
