@@ -620,3 +620,76 @@ section {
 
 @media (max-width: 1100px) { .about-grid { grid-template-columns: 1fr; gap: 80px; } }
 @media (max-width: 768px) { .about-row { grid-template-columns: 1fr; gap: 8px; } .about-heading { margin-bottom: 40px; } .about-list { gap: 30px; } }
+/* ==========================================================================
+   10. WORK PAGE STYLES
+   ========================================================================== */
+.works-page-header {
+    padding-top: 180px;
+    padding-bottom: 60px;
+    background-color: var(--bg-primary);
+}
+
+.works-page-title {
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 60px;
+    line-height: 1;
+}
+
+/* --- FILTER NAVIGATION --- */
+.filter-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 20px;
+}
+
+.filter-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    font-size: 1.05rem;
+    opacity: 0.75;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    transition: opacity 0.3s ease;
+}
+
+.filter-btn:hover {
+    opacity: 1;
+}
+
+.filter-btn.active {
+    opacity: 1;
+    font-weight: 500;
+}
+
+/* The Animated Underline */
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -21px; /* Drops it down perfectly over the grey border */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-primary);
+    /* By default, it shrinks out to the right */
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.filter-btn.active::after {
+    /* When active, it grows in from the left */
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.work-page-grid {
+    padding-bottom: 160px;
+    background-color: var(--bg-primary);
+}
