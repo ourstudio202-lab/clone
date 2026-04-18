@@ -639,7 +639,7 @@ section {
     letter-spacing: -0.02em;
     color: var(--text-primary);
     margin-bottom: 60px;
-    text-transform: uppercase;
+    /* Removed text-transform: uppercase; so it matches other sections */
 }
 
 .about-list {
@@ -657,24 +657,31 @@ section {
 }
 
 .about-label {
-    font-size: 0.85rem;
+    /* CHANGED: Lowered from 0.85rem to 0.75rem for a smaller, sleeker label */
+    font-size: 0.75rem; 
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    /* Nudges the label down slightly so it perfectly aligns with the first line of the paragraph */
     padding-top: 5px; 
 }
 
 .about-text p {
-    font-size: 1.15rem;
+    /* CHANGED: Lowered from 1.15rem to 1rem (standard paragraph size) */
+    font-size: 1rem; 
     color: var(--text-primary);
-    line-height: 1.4;
+    line-height: 1.5; /* Slightly increased line-height for readability at a smaller size */
     margin: 0;
 }
 
 .about-image {
     width: 100%;
-    /* Creates a classic portrait aspect ratio */
+    /* NEW: Forces the image to stop growing once it hits this width. 
+       Lower this number (e.g., 400px or 350px) to make the image even smaller! */
+    max-width: 450px; 
+    
+    /* NEW: Pushes the newly shrunken image to the right alignment */
+    margin-left: auto; 
+    
     aspect-ratio: 4 / 5; 
     overflow: hidden;
     background-color: var(--bg-secondary);
