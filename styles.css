@@ -631,7 +631,9 @@ section {
    ========================================================================== */
 .works-page-header {
     padding-top: 180px;
-    padding-bottom: 0; /* Let the filter-nav control the bottom gap */
+    padding-bottom: 0; 
+    /* OVERRIDE: Kills the global 100vh minimum height */
+    min-height: auto; 
     background-color: var(--bg-primary);
 }
 
@@ -649,14 +651,11 @@ section {
     flex-wrap: wrap;
     gap: 2.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    
-    /* Space between the text and the grey line */
     padding-bottom: 20px;
     
-    /* REDUCED: Space immediately below the grey line (Changed from 40px to 20px) */
-    margin-bottom: 20px; 
+    /* OVERRIDE: Single point of control for the gap between filters and grid */
+    margin-bottom: 40px; 
 }
-
 
 .filter-btn {
     background: none;
@@ -698,16 +697,11 @@ section {
     transform: scaleX(1);
 }
 
-/* ... keep your filter-btn CSS the same ... */
-
 .work-page-grid {
-    /* FORCES the global 10vh gap to disappear */
-    padding-top: 0 !important; 
-    
-    /* ⚙️ MANUAL ADJUSTMENT DIAL ⚙️
-       If they are STILL too low, you can make this a negative number! 
-       (Example: margin-top: -20px; will pull them up over the gap) */
-    margin-top: 0px; 
+    /* OVERRIDE: Kills global section padding and min-height */
+    min-height: auto; 
+    padding-top: 0; 
+    margin-top: 0; 
     
     padding-bottom: 160px;
     background-color: var(--bg-primary);
@@ -716,19 +710,17 @@ section {
 /* --- WORK PAGE GRID OVERRIDES (3-Column Layout) --- */
 .work-page-grid .works-grid {
     grid-template-columns: repeat(3, 1fr);
-    /* CHANGED: Splits the gap. 30px horizontally, 80px vertically for deep breathing room */
     column-gap: 30px;
     row-gap: 80px; 
 }
 
 .work-page-grid .work-image-wrapper {
-    /* Removes the massive clamped height and forces the perfect 3/4 portrait shape */
     height: auto;
     aspect-ratio: 3 / 4;
     border-radius: 0; 
 }
 
-/* --- Mobile / Tablet Adjustments for 3-Column Work Grid --- */
+/* --- Mobile / Tablet Adjustments --- */
 @media (max-width: 1100px) {
     .work-page-grid .works-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -741,6 +733,6 @@ section {
         gap: 20px;
     }
     .work-page-grid .work-image-wrapper {
-        aspect-ratio: 4 / 3; /* Landscape on mobile so they aren't insanely tall */
+        aspect-ratio: 4 / 3; 
     }
 }
