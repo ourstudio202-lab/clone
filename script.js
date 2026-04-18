@@ -29,14 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================================================================
-// 3. GLOBAL ANIMATIONS (Navbar scrolling, etc.)
+// 3. GLOBAL ANIMATIONS (Navbar & Page Transitions)
 // ==========================================================================
 function initGlobalInteractions() {
     const header = document.querySelector(".site-header");
     
-    if (!header) return; 
-
-    if (typeof gsap !== "undefined") {
+    if (header && typeof gsap !== "undefined") {
         gsap.from(header, { y: -20, opacity: 0, duration: 0.8, ease: "power3.out", delay: 0.1 });
     }
 
@@ -46,6 +44,40 @@ function initGlobalInteractions() {
         } else {
             header.classList.remove("scrolled");
         }
+    });
+
+    // --- PAGE ENTRANCE TRANSITION (Bottom to Top) ---
+    // Every time a page loads, it smoothly glides up into place
+    gsap.from("#smooth-wrapper", {
+        y: 80,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        clearProps: "all"
+    });
+
+    // --- PAGE EXIT TRANSITION (Intercepts Link Clicks) ---
+    // Smoothly slides the current page up and away before loading the next one
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            
+            // Only trigger on internal HTML links that aren't the current active tab
+            if (href && href.includes('.html') && !e.ctrlKey && !e.metaKey && !link.classList.contains('active')) {
+                e.preventDefault(); // Stop instant navigation
+                
+                // Slide up and fade out before changing the page
+                gsap.to("#smooth-wrapper", {
+                    y: -60, 
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: "power3.inOut",
+                    onComplete: () => {
+                        window.location.href = href;
+                    }
+                });
+            }
+        });
     });
 }
 
@@ -178,7 +210,61 @@ function initHomePage() {
            .from(".about-image", { y: 60, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.8"); 
 }
 
-// Sub-page blank templates
-function initWorkPage() { console.log("Work page logic loaded."); }
+// ==========================================================================
+// 5. WORK PAGE LOGIC (Filters)
+// ==========================================================================
+function initWorkPage() { 
+    console.log("Work page logic loaded."); 
+    
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const workCards = document.querySelectorAll('.work-card');
+
+    if (filterBtns.length === 0) return;
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active state from all buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active state to clicked button (triggers CSS underline animation)
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            // Fade out current grid
+            gsap.to(workCards, {
+                opacity: 0,
+                y: 20,
+                duration: 0.3,
+                ease: "power2.in",
+                onComplete: () => {
+                    // Toggle visibility based on category
+                    workCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category').includes(filterValue)) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+
+                    // Trigger ScrollTrigger refresh so grid spacing recalculates
+                    if (typeof ScrollTrigger !== "undefined") {
+                        ScrollTrigger.refresh();
+                    }
+
+                    // Fade the new filtered cards back in, slightly staggered
+                    const visibleCards = Array.from(workCards).filter(c => c.style.display !== 'none');
+                    gsap.to(visibleCards, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.5,
+                        stagger: 0.1,
+                        ease: "power3.out"
+                    });
+                }
+            });
+        });
+    });
+}
+
 function initAboutPage() { console.log("About page logic loaded."); }
 function initContactPage() { console.log("Contact page logic loaded."); }
