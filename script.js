@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================================================================
-// 3. GLOBAL ANIMATIONS (Navbar & Page Transitions)
+// 3. GLOBAL ANIMATIONS (Navbar, Mobile Menu, Page Transitions)
 // ==========================================================================
 function initGlobalInteractions() {
     const header = document.querySelector(".site-header");
@@ -46,8 +46,21 @@ function initGlobalInteractions() {
         }
     });
 
+    // --- MOBILE MENU LOGIC ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            
+            // Lock body scroll when menu is open
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+    }
+
     // --- PAGE ENTRANCE TRANSITION (Bottom to Top) ---
-    // Every time a page loads, it smoothly glides up into place
     gsap.from("#smooth-wrapper", {
         y: 80,
         opacity: 0,
@@ -57,15 +70,21 @@ function initGlobalInteractions() {
     });
 
     // --- PAGE EXIT TRANSITION (Intercepts Link Clicks) ---
-    // Smoothly slides the current page up and away before loading the next one
     document.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
             
             // Only trigger on internal HTML links that aren't the current active tab
             if (href && href.includes('.html') && !e.ctrlKey && !e.metaKey && !link.classList.contains('active')) {
-                e.preventDefault(); // Stop instant navigation
+                e.preventDefault(); 
                 
+                // Close the mobile menu automatically if it's open
+                if (menuToggle && navLinks) {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+
                 // Slide up and fade out before changing the page
                 gsap.to("#smooth-wrapper", {
                     y: -60, 
@@ -82,7 +101,7 @@ function initGlobalInteractions() {
 }
 
 // ==========================================================================
-// 4. HOME PAGE LOGIC (ScrollTriggers & Hover Effects)
+// 4. HOME PAGE LOGIC
 // ==========================================================================
 function initHomePage() {
     console.log("Home page logic loaded.");
@@ -93,39 +112,21 @@ function initHomePage() {
 
     if (!heroSection || popImages.length === 0) return;
 
-    // --------------------------------------------------
-    // A. HERO ENTRANCE (Title loads in)
-    // --------------------------------------------------
     let interactionEnabled = false; 
 
     const introTl = gsap.timeline();
     introTl.from(textLines, {
-        y: 40,
-        opacity: 0,
-        duration: 0.6,         
-        ease: "power3.out",
-        stagger: 0.1           
-    }).call(() => {
-        interactionEnabled = true;
-    }, null, "+=0.1");         
+        y: 40, opacity: 0, duration: 0.6, ease: "power3.out", stagger: 0.1           
+    }).call(() => { interactionEnabled = true; }, null, "+=0.1");         
 
-
-    // --------------------------------------------------
-    // B. HERO IMAGE POPUP LOGIC (Mouse movement)
-    // --------------------------------------------------
-    let currentIndex = 0;
-    let lastX = 0;
-    let lastY = 0;
-    let activeImage = null; 
-    let zIndexCounter = 1;  
-    const minDistance = 180; 
+    let currentIndex = 0; let lastX = 0; let lastY = 0; let activeImage = null; 
+    let zIndexCounter = 1; const minDistance = 180; 
 
     heroSection.addEventListener("mousemove", (e) => {
         if (!interactionEnabled) return;
         if (lastX === 0 && lastY === 0) { lastX = e.clientX; lastY = e.clientY; return; }
 
-        const deltaX = e.clientX - lastX;
-        const deltaY = e.clientY - lastY;
+        const deltaX = e.clientX - lastX; const deltaY = e.clientY - lastY;
         const distance = Math.hypot(deltaX, deltaY);
 
         if (distance > minDistance) {
@@ -150,8 +151,7 @@ function initHomePage() {
                 .to(img, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" })
                 .to(img, { opacity: 0, scale: 0.92, duration: 0.4, ease: "power3.out" }, `+=${holdTime}`);
 
-            activeImage = img;
-            currentIndex = (currentIndex + 1) % popImages.length;
+            activeImage = img; currentIndex = (currentIndex + 1) % popImages.length;
         }
     });
 
@@ -161,20 +161,11 @@ function initHomePage() {
         lastX = 0; lastY = 0; activeImage = null;
     });
 
-    // --------------------------------------------------
-    // C. SCROLL: HERO PARALLAX (Shrinks into background)
-    // --------------------------------------------------
     gsap.to([".hero-content", ".hero-pop-images"], {
         scrollTrigger: { trigger: ".selected-works", start: "top bottom", end: "top top", scrub: true },
-        scale: 0.70,       
-        y: -60,            
-        opacity: 0.2,      
-        ease: "none"
+        scale: 0.70, y: -60, opacity: 0.2, ease: "none"
     });
 
-    // --------------------------------------------------
-    // D. SCROLL: SELECTED WORKS REVEAL
-    // --------------------------------------------------
     gsap.from(".selected-works .works-header", {
         scrollTrigger: { trigger: ".selected-works", start: "top 80%" },
         y: 40, opacity: 0, duration: 0.8, ease: "power3.out"
@@ -185,9 +176,6 @@ function initHomePage() {
         y: 60, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out"
     });
 
-    // --------------------------------------------------
-    // E. SCROLL: SERVICES REVEAL
-    // --------------------------------------------------
     gsap.from(".services-header", {
         scrollTrigger: { trigger: ".services-section", start: "top 85%" },
         y: 40, opacity: 0, duration: 0.8, ease: "power3.out"
@@ -198,13 +186,7 @@ function initHomePage() {
         y: 60, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out"
     });
 
-    // --------------------------------------------------
-    // F. SCROLL: ABOUT US REVEAL
-    // --------------------------------------------------
-    const aboutTl = gsap.timeline({
-        scrollTrigger: { trigger: ".about-section", start: "top 80%" }
-    });
-
+    const aboutTl = gsap.timeline({ scrollTrigger: { trigger: ".about-section", start: "top 80%" } });
     aboutTl.from(".about-heading", { y: 40, opacity: 0, duration: 0.8, ease: "power3.out" })
            .from(".about-row", { y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out" }, "-=0.4") 
            .from(".about-image", { y: 60, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.8"); 
@@ -223,21 +205,14 @@ function initWorkPage() {
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active state from all buttons
             filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active state to clicked button (triggers CSS underline animation)
             btn.classList.add('active');
 
             const filterValue = btn.getAttribute('data-filter');
 
-            // Fade out current grid
             gsap.to(workCards, {
-                opacity: 0,
-                y: 20,
-                duration: 0.3,
-                ease: "power2.in",
+                opacity: 0, y: 20, duration: 0.3, ease: "power2.in",
                 onComplete: () => {
-                    // Toggle visibility based on category
                     workCards.forEach(card => {
                         if (filterValue === 'all' || card.getAttribute('data-category').includes(filterValue)) {
                             card.style.display = 'flex';
@@ -246,20 +221,10 @@ function initWorkPage() {
                         }
                     });
 
-                    // Trigger ScrollTrigger refresh so grid spacing recalculates
-                    if (typeof ScrollTrigger !== "undefined") {
-                        ScrollTrigger.refresh();
-                    }
+                    if (typeof ScrollTrigger !== "undefined") { ScrollTrigger.refresh(); }
 
-                    // Fade the new filtered cards back in, slightly staggered
                     const visibleCards = Array.from(workCards).filter(c => c.style.display !== 'none');
-                    gsap.to(visibleCards, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.5,
-                        stagger: 0.1,
-                        ease: "power3.out"
-                    });
+                    gsap.to(visibleCards, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power3.out" });
                 }
             });
         });
