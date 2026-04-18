@@ -141,12 +141,16 @@ section {
    5. Global Footer
    ========================================== */
 .site-footer {
-    /* FIXED: Ensured footer sits on layer 2 to cover the sticky hero */
     position: relative;
     z-index: 2;
-    background-color: var(--bg-secondary); 
-    padding: 8rem var(--padding-x) 6rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    /* CHANGED: Now perfectly matches the website's main dark background */
+    background-color: var(--bg-primary); 
+    
+    /* CHANGED: Tightened the massive 8rem top / 6rem bottom down to 4rem / 2rem */
+    padding: 4rem var(--padding-x) 2rem; 
+    
+    /* CHANGED: A sharp, ultra-thin white line at 15% opacity for clean separation */
+    border-top: 1px solid rgba(255, 255, 255, 0.15); 
 }
 
 .footer-container {
@@ -230,13 +234,13 @@ section {
     .footer-container {
         flex-direction: column;
         align-items: flex-start;
-        gap: 4rem;
+        /* CHANGED: Tightened mobile column gap from 4rem to 2.5rem */
+        gap: 2.5rem; 
     }
     .footer-heading {
         font-size: 3.5rem;
     }
 }
-
 /* ==========================================
    6. Home Page - Hero Section
    ========================================== */
