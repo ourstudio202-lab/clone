@@ -95,18 +95,22 @@ section {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2.5rem var(--padding-x);
+    /* CHANGED: Matches the exact padding of your grid container */
+    padding: 2.5rem clamp(40px, 5vw, 60px); 
     transition: padding 0.4s ease-in-out;
-    max-width: var(--container-max-width);
+    /* CHANGED: Expanded from 1440px to 1800px to align with content */
+    max-width: 1800px; 
     margin: 0 auto;
 }
 
 .site-header.scrolled .navbar {
-    padding: 1.25rem var(--padding-x);
+    /* CHANGED: Matches the clamped padding for when you scroll */
+    padding: 1.25rem clamp(40px, 5vw, 60px);
 }
 
 .nav-logo {
@@ -147,7 +151,8 @@ section {
     position: relative;
     z-index: 2;
     background-color: var(--bg-primary); 
-    padding: 4rem var(--padding-x) 2rem; 
+    /* CHANGED: Applies the 40px-60px clamped padding to the left and right */
+    padding: 4rem clamp(40px, 5vw, 60px) 2rem; 
     border-top: 1px solid rgba(255, 255, 255, 0.15); 
 }
 
@@ -155,7 +160,8 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    max-width: var(--container-max-width);
+    /* CHANGED: Expanded from 1440px to 1800px to align with the grid */
+    max-width: 1800px; 
     margin: 0 auto;
 }
 
@@ -690,15 +696,18 @@ section {
 }
 
 .work-page-grid {
+    /* NEW: Kills the invisible global 10vh padding pushing the grid down */
+    padding-top: 0; 
     padding-bottom: 160px;
     background-color: var(--bg-primary);
 }
 
 /* --- WORK PAGE GRID OVERRIDES (3-Column Layout) --- */
-/* This forces the grid on the Work page to act like the Services grid */
 .work-page-grid .works-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    /* CHANGED: Splits the gap. 30px horizontally, 80px vertically for deep breathing room */
+    column-gap: 30px;
+    row-gap: 80px; 
 }
 
 .work-page-grid .work-image-wrapper {
