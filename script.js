@@ -225,6 +225,33 @@ function initHomePage() {
         stagger: 0.1, // Faster stagger since there are 6 cards
         ease: "power3.out"
     });
+// --- SCROLL ANIMATIONS (ABOUT SECTION) ---
+    const aboutTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".about-section",
+            start: "top 80%",
+        }
+    });
+
+    aboutTl.from(".about-heading", {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out"
+    })
+    .from(".about-row", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out"
+    }, "-=0.4") // Starts slightly before the heading finishes
+    .from(".about-image", {
+        y: 60,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out"
+    }, "-=0.8"); // Animates in alongside the text
 }
 
 function initWorkPage() { console.log("Work page logic loaded."); }
