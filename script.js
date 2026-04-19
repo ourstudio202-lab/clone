@@ -257,27 +257,44 @@ function initWorkPage() {
 }
 
 // ==========================================================================
-// 6. ABOUT PAGE LOGIC (Scroll Reveals)
+// 6. ABOUT PAGE LOGIC (Native Narrative Scroll)
 // ==========================================================================
 function initAboutPage() { 
-    console.log("About page logic loaded."); 
+    console.log("About page narrative logic loaded."); 
     
-    // Selects all elements with the 'reveal-fade' class
-    const revealElements = document.querySelectorAll('.reveal-fade');
-    
-    if (revealElements.length > 0 && typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
-        revealElements.forEach(elem => {
-            gsap.from(elem, {
-                scrollTrigger: {
-                    trigger: elem,
-                    start: "top 90%", // Animates when the element is 10% up from the bottom of the screen
-                },
-                y: 40,
-                opacity: 0,
-                duration: 0.8,
-                ease: "power3.out"
-            });
+    // 1. Intersection Observer for Chapter Reveals
+    // Triggers when the element is 10% up from the bottom of the screen
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -10% 0px',
+        threshold: 0
+    };
+
+    const narrativeObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add the class that triggers the CSS transition
+                entry.target.classList.add('in-view');
+                // Unobserve so it only animates once per page load
+                observer.unobserve(entry.target);
+            }
         });
+    }, observerOptions);
+
+    // Grab all elements tagged with our new animation classes
+    const animatedElements = document.querySelectorAll('.fade-up, .fade-right, .scale-up');
+    animatedElements.forEach(el => narrativeObserver.observe(el));
+
+    // 2. Hero Section Subtle Scroll Fade & Parallax
+    const heroSection = document.querySelector('.about-page-hero');
+    if (heroSection) {
+        window.addEventListener('scroll', () => {
+            // Only update the variable if we are actually at the top of the page
+            // This preserves performance when scrolling further down
+            if (window.scrollY < window.innerHeight) {
+                heroSection.style.setProperty('--scroll-offset', window.scrollY);
+            }
+        }, { passive: true }); // passive: true ensures silky smooth scrolling
     }
 }
 
