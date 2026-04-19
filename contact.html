@@ -33,14 +33,87 @@
     <main id="smooth-wrapper">
         <div id="smooth-content">
             
-            <section class="section-contact">
-                </section>
+            <section class="contact-section">
+                <div class="ambient-glow"></div>
+
+                <div class="container works-container">
+                    
+                    <div class="contact-page-header fade-in-up delay-1">
+                        <h1 class="contact-page-title">Let’s build<br>something great.</h1>
+                        <p class="contact-page-subtitle">Tell us about your project — we’ll get back within 24 hours.</p>
+                    </div>
+
+                    <div class="contact-grid">
+                        
+                        <div class="contact-form-wrapper">
+                            <form action="#" method="POST" class="minimal-form">
+                                
+                                <div class="input-group fade-in-up delay-2">
+                                    <input type="text" name="name" id="name" class="contact-input" placeholder="Your Name" required>
+                                </div>
+
+                                <div class="input-group fade-in-up delay-3">
+                                    <input type="email" name="email" id="email" class="contact-input" placeholder="Email Address" required>
+                                </div>
+
+                                <div class="input-group fade-in-up delay-4">
+                                    <select name="project_type" id="project_type" class="contact-input custom-select" required>
+                                        <option value="" disabled selected hidden>Project Type</option>
+                                        <option value="branding">Branding</option>
+                                        <option value="ui_ux">UI/UX Design</option>
+                                        <option value="web_dev">Website Development</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-group fade-in-up delay-5">
+                                    <textarea name="message" id="message" class="contact-input" placeholder="Tell us about your project..." required></textarea>
+                                </div>
+
+                                <div class="input-group fade-in-up delay-6">
+                                    <button type="submit" class="btn-filled">Send Message</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <div class="contact-info-wrapper fade-in-up delay-4">
+                            
+                            <div class="info-block">
+                                <span class="info-label">EMAIL US</span>
+                                <a href="mailto:thedesignelves@gmail.com" class="info-text link-hover">thedesignelves@gmail.com</a>
+                            </div>
+
+                            <div class="info-block">
+                                <span class="info-label">CALL US</span>
+                                <a href="tel:+916749196577" class="info-text link-hover">+91 6749196577</a>
+                            </div>
+
+                            <div class="info-block">
+                                <span class="info-label">LOCATION</span>
+                                <p class="info-text">Jaipur, Rajasthan<br>India</p>
+                            </div>
+
+                            <div class="info-block socials-block">
+                                <span class="info-label">FOLLOW US</span>
+                                <div class="footer-socials contact-socials">
+                                    <a href="#" class="social-circle"></a>
+                                    <a href="#" class="social-circle"></a>
+                                    <a href="#" class="social-circle"></a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
 
             <footer class="site-footer">
                 <div class="footer-container">
                     <div class="footer-left">
                         <h2 class="footer-heading">Let’s Make<br>it Happen!</h2>
-                        <a href="contact.html" class="btn-outline">Contact Now</a>
+                        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="btn-outline">Back to Top</a>
                     </div>
                     <div class="footer-right">
                         <div class="footer-contact-info">
