@@ -298,7 +298,13 @@ section {
 @media (max-width: 768px) {
     .selected-works { padding-top: 100px; padding-bottom: 100px; }
     .works-header { flex-direction: column; align-items: flex-start; gap: 15px; margin-bottom: 30px; }
-    .works-grid { grid-template-columns: 1fr; gap: 30px; }
+    
+    /* CHANGED: Gap increased to 40px for better vertical separation */
+    .works-grid { grid-template-columns: 1fr; gap: 40px; }
+    
+    /* NEW: Tighter grouping between image and text on mobile (reduced from 20px to 15px) */
+    .work-card { gap: 15px; } 
+    
     .work-image-wrapper { height: clamp(350px, 60vw, 450px); }
 }
 
