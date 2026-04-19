@@ -739,3 +739,174 @@ textarea.contact-input {
     .contact-info-wrapper { flex-direction: column; gap: 35px; }
     .info-text { font-size: 1.25rem; }
 }
+/* ==========================================================================
+   8. ABOUT PAGE (EDITORIAL) STYLES
+   ========================================================================== */
+
+/* --- 1. HERO SECTION --- */
+.about-page-hero {
+    padding-top: 180px;
+    padding-bottom: 60px;
+    background-color: var(--bg-primary);
+}
+
+.about-hero-title {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 30px;
+    max-width: 900px;
+}
+
+.about-hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 700px;
+}
+
+/* --- 2 & 3. EDITORIAL STORY SECTION --- */
+.about-editorial-section {
+    padding-top: 60px;
+    padding-bottom: 100px;
+    background-color: var(--bg-primary);
+}
+
+.editorial-wrapper {
+    max-width: 680px; /* Forces narrow, readable editorial column */
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.editorial-block {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.editorial-block p {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    line-height: 1.65;
+    color: var(--text-secondary);
+}
+
+.editorial-block p .text-white {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Highlights the specific transition text */
+.editorial-highlight {
+    font-size: clamp(1.3rem, 2.5vw, 1.6rem) !important;
+    color: var(--text-primary) !important;
+    font-weight: 500;
+    line-height: 1.5 !important;
+    letter-spacing: -0.01em;
+}
+
+/* --- 4. APPROACH GRID --- */
+.about-approach-section {
+    padding-top: 80px;
+    padding-bottom: 120px;
+    background-color: var(--bg-primary);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.approach-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 60px;
+    row-gap: 80px;
+}
+
+.approach-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Micro-interaction: Subtle lift */
+@media (min-width: 769px) {
+    .approach-card:hover { transform: translateY(-8px); }
+}
+
+.approach-number {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 25px;
+    display: inline-block;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.approach-title {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 15px;
+    letter-spacing: -0.01em;
+}
+
+.approach-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 90%;
+}
+
+/* --- 5. PHILOSOPHY SECTION --- */
+.about-philosophy-section {
+    padding-top: 120px;
+    padding-bottom: 140px;
+    background-color: var(--bg-primary);
+}
+
+.philosophy-heading {
+    font-size: clamp(2rem, 4.5vw, 4rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    max-width: 1000px;
+}
+
+/* --- 6. CTA SECTION --- */
+.about-cta-section {
+    padding-top: 40px;
+    padding-bottom: 160px;
+    background-color: var(--bg-primary);
+}
+
+.cta-heading {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+}
+
+
+/* --- ABOUT PAGE RESPONSIVENESS --- */
+@media (max-width: 1100px) {
+    .about-page-hero { padding-top: 140px; }
+    .approach-grid { column-gap: 40px; row-gap: 60px; }
+}
+
+@media (max-width: 768px) {
+    .about-page-hero { padding-top: 120px; padding-bottom: 40px; }
+    
+    .about-editorial-section { padding-top: 40px; padding-bottom: 80px; }
+    .editorial-wrapper { gap: 60px; }
+    .editorial-block { gap: 20px; }
+    
+    .about-approach-section { padding-top: 80px; padding-bottom: 80px; }
+    .approach-grid { grid-template-columns: 1fr; gap: 60px; }
+    .approach-text { max-width: 100%; }
+    
+    .about-philosophy-section { padding-top: 80px; padding-bottom: 100px; }
+    
+    .about-cta-section { padding-top: 40px; padding-bottom: 100px; }
+}
