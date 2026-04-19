@@ -190,6 +190,23 @@ function initHomePage() {
     aboutTl.from(".about-heading", { y: 40, opacity: 0, duration: 0.8, ease: "power3.out" })
            .from(".about-row", { y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out" }, "-=0.4") 
            .from(".about-image", { y: 60, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.8"); 
+
+    // --------------------------------------------------
+    // G. SERVICES ACCORDION LOGIC
+    // --------------------------------------------------
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    if (serviceCards.length > 0) {
+        serviceCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // 1. Remove the 'active' class from all cards
+                serviceCards.forEach(c => c.classList.remove('active'));
+                
+                // 2. Add the 'active' class to the clicked card
+                this.classList.add('active');
+            });
+        });
+    }
 }
 
 // ==========================================================================
