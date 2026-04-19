@@ -256,5 +256,29 @@ function initWorkPage() {
     });
 }
 
-function initAboutPage() { console.log("About page logic loaded."); }
+// ==========================================================================
+// 6. ABOUT PAGE LOGIC (Scroll Reveals)
+// ==========================================================================
+function initAboutPage() { 
+    console.log("About page logic loaded."); 
+    
+    // Selects all elements with the 'reveal-fade' class
+    const revealElements = document.querySelectorAll('.reveal-fade');
+    
+    if (revealElements.length > 0 && typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+        revealElements.forEach(elem => {
+            gsap.from(elem, {
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 90%", // Animates when the element is 10% up from the bottom of the screen
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            });
+        });
+    }
+}
+
 function initContactPage() { console.log("Contact page logic loaded."); }
