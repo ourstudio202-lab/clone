@@ -477,22 +477,29 @@ section {
     .works-page-title { margin-bottom: 30px; }
     .work-page-grid { padding-bottom: 80px; }
     
-    /* Tighter Filter Nav for small screens */
+    /* CRITICAL FIX: Filter Navigation 
+       Separated horizontal and vertical gaps. 
+       2.5rem row-gap creates massive breathing room vertically. 
+    */
     .filter-nav { 
-        gap: 1.25rem; 
+        column-gap: 1.25rem; 
+        row-gap: 2.5rem; 
         padding-bottom: 15px; 
-        margin-bottom: 30px; 
+        margin-bottom: 40px; 
     }
     
-    /* Fix underline alignment to match new mobile padding */
-    .filter-btn::after { bottom: -16px; } 
+    /* ANTI-JUMP FIX:
+       Forces all links to weight 500 on mobile so they don't expand 
+       and push other elements to the next line when clicked.
+    */
+    .filter-btn { font-weight: 500; }
+    
+    /* Pull the underline slightly tighter to the word on mobile */
+    .filter-btn::after { bottom: -12px; } 
 
     /* Mobile Grid: 1 Column */
     .work-page-grid .works-grid { 
         grid-template-columns: 1fr; 
-        gap: 40px; /* Tighter gap to prevent excessive scrolling */
+        gap: 50px; 
     }
-    
-    /* CRITICAL FIX: Removed aspect-ratio: 4/3 override here. 
-       Cards will now perfectly maintain the 3:4 portrait shape. */
 }
