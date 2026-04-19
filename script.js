@@ -171,9 +171,17 @@ function initHomePage() {
         y: 40, opacity: 0, duration: 0.8, ease: "power3.out"
     });
 
+    // Added transform perspective for 3D flip effects
+    gsap.set(".work-card", { transformPerspective: 1000 });
+    
     gsap.from(".work-card", {
         scrollTrigger: { trigger: ".works-grid", start: "top 85%" },
-        y: 60, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out"
+        y: 60, 
+        opacity: 0, 
+        rotateY: -10, // Applying 3D spatial transformation per core directives
+        duration: 0.8, 
+        stagger: 0.15, 
+        ease: "power3.out"
     });
 
     gsap.from(".services-header", {
@@ -192,18 +200,18 @@ function initHomePage() {
            .from(".about-image", { y: 60, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.8"); 
 
     // --------------------------------------------------
-    // G. SERVICES ACCORDION LOGIC
+    // G. SERVICES ACCORDION LOGIC (Mobile Only)
     // --------------------------------------------------
     const serviceCards = document.querySelectorAll('.service-card');
     
     if (serviceCards.length > 0) {
         serviceCards.forEach(card => {
             card.addEventListener('click', function() {
-                // 1. Remove the 'active' class from all cards
-                serviceCards.forEach(c => c.classList.remove('active'));
-                
-                // 2. Add the 'active' class to the clicked card
-                this.classList.add('active');
+                // Only run the accordion logic if the screen is mobile sized (≤768px)
+                if (window.innerWidth <= 768) {
+                    serviceCards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                }
             });
         });
     }
