@@ -286,7 +286,6 @@ section {
 .work-image-wrapper { 
     width: 100%; 
     height: auto; 
-    /* FIXED: Replaced fluctuating height clamps with a strict aspect ratio matching desktop */
     aspect-ratio: 4 / 5; 
     overflow: hidden; 
     background-color: var(--bg-secondary); 
@@ -304,7 +303,6 @@ section {
 }
 
 @media (max-width: 768px) {
-    /* UNIFIED PADDING FOR MOBILE */
     .selected-works { padding-top: 80px; padding-bottom: 80px; }
     .works-header { flex-direction: column; align-items: flex-start; gap: 15px; margin-bottom: 30px; }
     .works-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -348,7 +346,6 @@ section {
 }
 
 @media (max-width: 768px) { 
-    /* UNIFIED PADDING FOR MOBILE */
     .services-section { padding-top: 80px; padding-bottom: 80px; }
     .services-grid { grid-template-columns: 1fr; gap: 25px; } 
     .service-content { padding: 20px; }
@@ -375,7 +372,6 @@ section {
 
 @media (max-width: 1100px) { .about-grid { grid-template-columns: 1fr; gap: 80px; } }
 @media (max-width: 768px) { 
-    /* UNIFIED PADDING FOR MOBILE */
     .about-section { padding-top: 80px; padding-bottom: 80px; }
     .about-row { grid-template-columns: 1fr; gap: 8px; } 
     .about-heading { margin-bottom: 40px; } 
@@ -458,19 +454,16 @@ section {
 
 .work-page-grid .work-image-wrapper {
     height: auto;
-    /* STRICTLY LOCKED TO 3/4 GLOBALLY */
     aspect-ratio: 3 / 4;
     border-radius: 0; 
 }
 
 /* --- Mobile / Tablet Adjustments --- */
 @media (max-width: 1100px) {
-    /* Tablet Spacing Adjustments */
     .works-page-header { padding-top: 140px; }
     .work-page-grid { padding-bottom: 120px; }
     .filter-nav { gap: 1.5rem; }
     
-    /* Tablet Grid: 2 Columns */
     .work-page-grid .works-grid { 
         grid-template-columns: repeat(2, 1fr); 
         row-gap: 60px; 
@@ -478,15 +471,10 @@ section {
 }
 
 @media (max-width: 768px) {
-    /* Mobile Spacing Adjustments */
     .works-page-header { padding-top: 120px; }
     .works-page-title { margin-bottom: 30px; }
     .work-page-grid { padding-bottom: 80px; }
     
-    /* CRITICAL FIX: Filter Navigation 
-       Separated horizontal and vertical gaps. 
-       2.5rem row-gap creates massive breathing room vertically. 
-    */
     .filter-nav { 
         column-gap: 1.25rem; 
         row-gap: 2.5rem; 
@@ -494,21 +482,15 @@ section {
         margin-bottom: 40px; 
     }
     
-    /* ANTI-JUMP FIX:
-       Forces all links to weight 500 on mobile so they don't expand 
-       and push other elements to the next line when clicked.
-    */
     .filter-btn { font-weight: 500; }
-    
-    /* Pull the underline slightly tighter to the word on mobile */
     .filter-btn::after { bottom: -12px; } 
 
-    /* Mobile Grid: 1 Column */
     .work-page-grid .works-grid { 
         grid-template-columns: 1fr; 
         gap: 50px; 
     }
 }
+
 /* ==========================================================================
    7. CONTACT PAGE STYLES
    ========================================================================== */
@@ -564,7 +546,6 @@ section {
     position: relative;
     z-index: 2;
     display: grid;
-    /* 1.2fr gives the form slightly more width than the info block */
     grid-template-columns: 1.2fr 1fr;
     gap: 100px;
     align-items: flex-start;
@@ -598,21 +579,17 @@ section {
     color: rgba(255, 255, 255, 0.3);
 }
 
-/* Input Micro-Interactions */
 .contact-input:focus {
     outline: none;
     border-bottom-color: var(--text-primary);
-    /* Subtle glow on the active line */
     box-shadow: 0 10px 15px -10px rgba(255, 255, 255, 0.1); 
 }
 
-/* Custom Dropdown Styling */
 .custom-select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     cursor: pointer;
-    /* Custom CSS chevron arrow */
     background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E");
     background-repeat: no-repeat;
     background-position: right 0 center;
@@ -629,7 +606,6 @@ textarea.contact-input {
     resize: vertical;
 }
 
-/* Filled CTA Button */
 .btn-filled {
     background-color: var(--text-primary);
     color: var(--bg-primary);
@@ -647,7 +623,6 @@ textarea.contact-input {
 
 .btn-filled:hover {
     transform: scale(1.02);
-    /* Soft color invert / darken on hover */
     background-color: #d9d9d9; 
 }
 
@@ -721,7 +696,6 @@ textarea.contact-input {
         gap: 80px; 
     }
     
-    /* Flip the visual order on tablet/mobile so form is first */
     .contact-form-wrapper { order: 1; }
     .contact-info-wrapper { order: 2; flex-direction: row; flex-wrap: wrap; gap: 40px; }
     .info-block { flex: 1 1 45%; }
@@ -739,6 +713,7 @@ textarea.contact-input {
     .contact-info-wrapper { flex-direction: column; gap: 35px; }
     .info-text { font-size: 1.25rem; }
 }
+
 /* ==========================================================================
    8. ABOUT PAGE (EDITORIAL) STYLES
    ========================================================================== */
@@ -909,4 +884,99 @@ textarea.contact-input {
     .about-philosophy-section { padding-top: 80px; padding-bottom: 100px; }
     
     .about-cta-section { padding-top: 40px; padding-bottom: 100px; }
+}
+
+/* ==========================================================================
+   9. NARRATIVE ANIMATIONS (INTERSECTION OBSERVER BASE)
+   ========================================================================== */
+
+/* --- CORE REVEAL CLASSES --- */
+.fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.fade-up.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-right {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.fade-right.in-view {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scale-up {
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.scale-up.in-view {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* --- STAGGER SYSTEM --- */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+
+/* --- HERO SCROLL PARALLAX --- */
+.about-page-hero {
+    --scroll-offset: 0;
+    /* Uses JS calculated variable to create ultra-smooth scroll fading/moving */
+    transform: translateY(calc(var(--scroll-offset) * 0.3px));
+    opacity: calc(1 - (var(--scroll-offset) * 0.0025));
+    will-change: transform, opacity;
+}
+
+/* --- INTERACTIVE TWEAKS --- */
+
+/* Approach Cards Dimming Effect */
+.approach-card {
+    opacity: 0.7;
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* CTA Button Hover Scale Override */
+.about-cta-section .btn-outline {
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+@media (min-width: 769px) {
+    .approach-card:hover {
+        opacity: 1;
+        transform: translateY(-6px);
+    }
+    
+    .about-cta-section .btn-outline:hover {
+        transform: scale(1.03);
+        background-color: var(--text-primary);
+        color: var(--bg-primary);
+    }
+}
+
+/* --- MOBILE ANIMATION OVERRIDES --- */
+@media (max-width: 768px) {
+    /* Speed up reveals slightly for mobile pacing */
+    .fade-up, .fade-right, .scale-up {
+        transition-duration: 0.6s;
+    }
+    
+    /* Remove hover opacity dependency on mobile */
+    .approach-card {
+        opacity: 1; 
+    }
 }
