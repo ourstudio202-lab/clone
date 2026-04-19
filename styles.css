@@ -452,16 +452,47 @@ section {
 
 .work-page-grid .work-image-wrapper {
     height: auto;
+    /* STRICTLY LOCKED TO 3/4 GLOBALLY */
     aspect-ratio: 3 / 4;
     border-radius: 0; 
 }
 
-/* --- Mobile / Tablet Adjustments --- */
+/* --- WORK PAGE RESPONSIVENESS --- */
 @media (max-width: 1100px) {
-    .work-page-grid .works-grid { grid-template-columns: repeat(2, 1fr); }
+    /* Tablet Spacing Adjustments */
+    .works-page-header { padding-top: 140px; }
+    .work-page-grid { padding-bottom: 120px; }
+    .filter-nav { gap: 1.5rem; }
+    
+    /* Tablet Grid: 2 Columns */
+    .work-page-grid .works-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        row-gap: 60px; 
+    }
 }
 
 @media (max-width: 768px) {
-    .work-page-grid .works-grid { grid-template-columns: 1fr; gap: 50px; }
-    .work-page-grid .work-image-wrapper { aspect-ratio: 4 / 3; }
+    /* Mobile Spacing Adjustments */
+    .works-page-header { padding-top: 120px; }
+    .works-page-title { margin-bottom: 30px; }
+    .work-page-grid { padding-bottom: 80px; }
+    
+    /* Tighter Filter Nav for small screens */
+    .filter-nav { 
+        gap: 1.25rem; 
+        padding-bottom: 15px; 
+        margin-bottom: 30px; 
+    }
+    
+    /* Fix underline alignment to match new mobile padding */
+    .filter-btn::after { bottom: -16px; } 
+
+    /* Mobile Grid: 1 Column */
+    .work-page-grid .works-grid { 
+        grid-template-columns: 1fr; 
+        gap: 40px; /* Tighter gap to prevent excessive scrolling */
+    }
+    
+    /* CRITICAL FIX: Removed aspect-ratio: 4/3 override here. 
+       Cards will now perfectly maintain the 3:4 portrait shape. */
 }
