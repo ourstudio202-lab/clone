@@ -893,3 +893,260 @@ textarea.contact-input {
         opacity: 1; 
     }
 }
+
+/* ==========================================================================
+   10. MODULAR CASE STUDY SYSTEM (SINGLE PROJECT)
+   ========================================================================== */
+
+/* --- 1. PROJECT HERO --- */
+.case-hero {
+    padding-top: 180px;
+    padding-bottom: 60px;
+    background-color: var(--bg-primary);
+}
+
+.case-title {
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 15px;
+}
+
+.case-meta {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.project-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: 40px;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.meta-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.meta-value {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+/* --- 2. FULL WIDTH HERO IMAGE (EDGE TO EDGE) --- */
+.case-media-edge {
+    width: 100%;
+    margin-bottom: 80px;
+    background-color: var(--bg-secondary);
+}
+
+.case-media-edge img {
+    width: 100%;
+    height: auto;
+    max-height: 85vh; /* Prevents extremely tall images from taking over */
+    object-fit: cover;
+    display: block;
+}
+
+/* --- BASE SECTION SPACING --- */
+.case-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: var(--bg-primary);
+}
+
+/* Utility for tighter image stacking */
+.case-padding-sm {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* --- 3 & 7. PROJECT INFO (2-COLUMN OVERVIEW) --- */
+.case-overview {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+}
+
+.case-heading {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.case-text {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 680px; /* Highly readable measure */
+}
+
+.case-text p {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    line-height: 1.65;
+    color: var(--text-secondary);
+}
+
+/* --- 5. PROCESS / APPROACH (CENTERED NARROW) --- */
+.case-text-center {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.case-heading-center {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.case-text-center p {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    line-height: 1.65;
+    color: var(--text-secondary);
+}
+
+/* --- 4 & 6. MODULAR IMAGE BLOCKS --- */
+
+/* Shared Image Wrapper (Handles Hover Scale & Aspect Ratios) */
+.case-image-wrapper {
+    width: 100%;
+    background-color: var(--bg-secondary);
+    overflow: hidden;
+}
+
+.case-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+
+@media (min-width: 769px) {
+    .case-image-wrapper:hover img {
+        transform: scale(1.04);
+    }
+}
+
+/* Block Type A: 2-Column Grid */
+.case-media-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.case-media-grid .case-image-wrapper {
+    aspect-ratio: 4 / 5; /* Consistent portrait ratio for grid */
+}
+
+/* Block Type B: Stacked Flow */
+.case-media-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Full Width Media Block */
+.project-block-media-full {
+    width: 100%;
+    margin-bottom: 120px;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+}
+
+.project-block-media-full img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- 8. NEXT PROJECT --- */
+.case-next-project {
+    padding-top: 120px;
+    padding-bottom: 160px;
+    text-align: center;
+    background-color: var(--bg-primary);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.next-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+}
+
+.next-title {
+    display: inline-block;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-decoration: none;
+    line-height: 1.1;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+@media (min-width: 769px) {
+    .next-title:hover {
+        opacity: 0.7;
+        transform: translateY(-10px);
+    }
+}
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 1100px) {
+    .project-meta-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    .case-overview { gap: 40px; }
+}
+
+@media (max-width: 768px) {
+    .case-hero { padding-top: 140px; padding-bottom: 40px; }
+    .case-title { margin-bottom: 10px; }
+    .project-meta-grid { grid-template-columns: 1fr; gap: 25px; padding-top: 30px; padding-bottom: 40px; }
+    
+    .case-media-edge { margin-bottom: 60px; }
+    
+    .case-section { padding-top: 40px; padding-bottom: 40px; }
+    .case-padding-sm { padding-top: 15px; padding-bottom: 15px; }
+
+    /* Stack 2-column overview */
+    .case-overview { grid-template-columns: 1fr; gap: 20px; }
+    .case-heading { font-size: 1.25rem; color: var(--text-secondary); }
+    .case-text p { color: var(--text-primary); } /* Increase contrast on mobile */
+    
+    .case-text-center { text-align: left; }
+    
+    /* Stack 2-column image grid */
+    .case-media-grid { grid-template-columns: 1fr; gap: 20px; }
+    .case-media-stack { gap: 20px; }
+    .project-block-media-full { margin-bottom: 80px; }
+    
+    .case-next-project { padding-top: 80px; padding-bottom: 120px; }
+}
