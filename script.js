@@ -218,42 +218,11 @@ function initHomePage() {
 }
 
 // ==========================================================================
-// 5. WORK PAGE LOGIC (Filters)
+// 5. WORK PAGE LOGIC
 // ==========================================================================
 function initWorkPage() { 
-    console.log("Work page logic loaded."); 
-    
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const workCards = document.querySelectorAll('.work-card');
-
-    if (filterBtns.length === 0) return;
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const filterValue = btn.getAttribute('data-filter');
-
-            gsap.to(workCards, {
-                opacity: 0, y: 20, duration: 0.3, ease: "power2.in",
-                onComplete: () => {
-                    workCards.forEach(card => {
-                        if (filterValue === 'all' || card.getAttribute('data-category').includes(filterValue)) {
-                            card.style.display = 'flex';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-
-                    if (typeof ScrollTrigger !== "undefined") { ScrollTrigger.refresh(); }
-
-                    const visibleCards = Array.from(workCards).filter(c => c.style.display !== 'none');
-                    gsap.to(visibleCards, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power3.out" });
-                }
-            });
-        });
-    });
+    console.log("Work page logic loaded. (Unified portfolio view)"); 
+    // Filter logic removed for clean, single-page flow.
 }
 
 // ==========================================================================
