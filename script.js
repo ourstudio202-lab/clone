@@ -17,12 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const currentPath = window.location.pathname.toLowerCase();
 
+    // UPDATED ROUTING: Now correctly catches your project folders!
     if (currentPath.includes("work")) {
         initWorkPage();
     } else if (currentPath.includes("about")) {
         initAboutPage();
     } else if (currentPath.includes("contact")) {
         initContactPage();
+    } else if (currentPath.includes("project")) {
+        initProjectPage(); // Triggers the scroll animations for case studies
     } else {
         initHomePage();
     }
@@ -259,12 +262,37 @@ function initAboutPage() {
     if (heroSection) {
         window.addEventListener('scroll', () => {
             // Only update the variable if we are actually at the top of the page
-            // This preserves performance when scrolling further down
             if (window.scrollY < window.innerHeight) {
                 heroSection.style.setProperty('--scroll-offset', window.scrollY);
             }
-        }, { passive: true }); // passive: true ensures silky smooth scrolling
+        }, { passive: true }); 
     }
+}
+
+// ==========================================================================
+// 7. PROJECT PAGE LOGIC
+// ==========================================================================
+function initProjectPage() {
+    console.log("Project page logic loaded."); 
+    
+    // Reuses the same robust Intersection Observer from the About page
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -10% 0px',
+        threshold: 0
+    };
+
+    const narrativeObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const animatedElements = document.querySelectorAll('.fade-up, .fade-right, .scale-up');
+    animatedElements.forEach(el => narrativeObserver.observe(el));
 }
 
 function initContactPage() { console.log("Contact page logic loaded."); }
