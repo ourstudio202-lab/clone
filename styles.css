@@ -900,7 +900,7 @@ textarea.contact-input {
 
 /* --- 1. HERO - HOOK --- */
 .ed-hero {
-    padding-top: 220px; /* Massive top spacing for drama */
+    padding-top: 220px; 
     padding-bottom: 60px;
     background-color: var(--bg-primary);
 }
@@ -931,9 +931,9 @@ textarea.contact-input {
 .ed-padding-none { padding-top: 0; padding-bottom: 0; }
 .ed-padding-large { padding-top: 140px; padding-bottom: 140px; }
 
-/* --- 2 & 8. NARROW TEXT BLOCKS (LEFT ALIGNED) --- */
+/* --- NARROW TEXT BLOCKS --- */
 .ed-context-section {
-    padding-top: 0; /* Pulls context tight up against the hero */
+    padding-top: 0; 
 }
 
 .ed-text-narrow {
@@ -949,28 +949,7 @@ textarea.contact-input {
     color: var(--text-secondary);
 }
 
-.ed-subheading {
-    font-size: 1.5rem;
-    color: var(--text-primary);
-    font-weight: 500;
-    margin-bottom: -10px;
-}
-
-/* --- 5. THOUGHT MOMENT (HORIZONTAL OFFSET) --- */
-.ed-text-offset {
-    max-width: 550px;
-    margin-left: auto; /* Pushes text to the right side of container */
-    padding-right: 5vw;
-}
-
-.ed-highlight {
-    font-size: clamp(1.3rem, 3vw, 1.8rem);
-    line-height: 1.5;
-    color: var(--text-primary);
-    font-weight: 400;
-}
-
-/* --- IMAGE HANDLING & MICRO-INTERACTIONS --- */
+/* --- IMAGE HANDLING --- */
 .ed-image-wrapper {
     width: 100%;
     background-color: var(--bg-secondary);
@@ -988,11 +967,11 @@ textarea.contact-input {
 
 @media (min-width: 769px) {
     .ed-image-wrapper:hover img {
-        transform: scale(1.03); /* Premium subtle hover */
+        transform: scale(1.03); 
     }
 }
 
-/* --- 4. ASYMMETRICAL STORY GRID --- */
+/* --- ASYMMETRICAL STORY GRID --- */
 .ed-media-asymmetric {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1004,29 +983,16 @@ textarea.contact-input {
     aspect-ratio: 4 / 5;
 }
 
-/* Pushes the right image down to create an editorial offset */
 @media (min-width: 769px) {
     .ed-offset-y {
         transform: translateY(120px); 
     }
-    /* Adds bottom padding to section so the offset image doesn't overlap next section */
     .ed-media-asymmetric {
         padding-bottom: 120px; 
     }
 }
 
-/* --- 7. STANDARD GALLERY GRID --- */
-.ed-gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-}
-
-.ed-gallery-grid .ed-image-wrapper {
-    aspect-ratio: 3 / 4;
-}
-
-/* --- 9. NEXT PROJECT --- */
+/* --- NEXT PROJECT --- */
 .ed-next-project {
     padding-top: 160px;
     padding-bottom: 180px;
@@ -1066,25 +1032,14 @@ textarea.contact-input {
 @media (max-width: 1100px) {
     .ed-hero { padding-top: 180px; }
     .ed-media-asymmetric { gap: 30px; }
-    .ed-gallery-grid { gap: 30px; }
 }
 
 @media (max-width: 768px) {
     .ed-hero { padding-top: 140px; padding-bottom: 40px; }
     .ed-title { margin-bottom: 10px; }
-    
     .ed-section { padding-top: 50px; padding-bottom: 50px; }
-    .ed-padding-large { padding-top: 80px; padding-bottom: 80px; }
-    
     .ed-text-narrow p { font-size: 1.15rem; color: var(--text-primary); }
-    
-    .ed-text-offset { margin-left: 0; padding-right: 0; }
-    
-    /* Stack grids and kill the asymmetrical offset on mobile */
     .ed-media-asymmetric { grid-template-columns: 1fr; gap: 30px; padding-bottom: 0; }
     .ed-offset-y { transform: translateY(0) !important; }
-    
-    .ed-gallery-grid { grid-template-columns: 1fr; gap: 30px; }
-    
     .ed-next-project { padding-top: 100px; padding-bottom: 120px; }
 }
