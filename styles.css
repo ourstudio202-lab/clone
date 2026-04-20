@@ -155,7 +155,7 @@ section {
    ========================================================================== */
 .site-footer {
     position: relative;
-    z-index: 2;
+    z-index: 20; /* Fixed overlap bug */
     background-color: var(--bg-primary); 
     padding: 4rem clamp(40px, 5vw, 60px) 2rem; 
     border-top: 1px solid rgba(255, 255, 255, 0.15); 
@@ -271,7 +271,7 @@ section {
 .hero-title .line-3 { font-size: clamp(5rem, 12vw, 160px); font-weight: 400; transform: translateX(40px); }
 
 /* --- SELECTED WORKS SECTION --- */
-.selected-works { position: relative; z-index: 2; margin-top: 0; background-color: var(--bg-primary); padding-top: 160px; padding-bottom: 90px; min-height: auto; }
+.selected-works { position: relative; z-index: 20; /* Fixed overlap bug */ margin-top: 0; background-color: var(--bg-primary); padding-top: 160px; padding-bottom: 90px; min-height: auto; }
 .works-container { max-width: 1800px; margin: 0 auto; padding: 0 clamp(40px, 5vw, 60px); }
 .works-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
 .works-header h2 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: var(--text-primary); }
@@ -314,7 +314,7 @@ section {
 }
 
 /* --- SERVICES SECTION --- */
-.services-section { position: relative; z-index: 2; padding-top: 20px; padding-bottom: 80px; background-color: var(--bg-primary); }
+.services-section { position: relative; z-index: 20; /* Fixed overlap bug */ padding-top: 20px; padding-bottom: 80px; background-color: var(--bg-primary); }
 .services-header { justify-content: flex-start; margin-bottom: 40px; }
 .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
 .service-card { position: relative; aspect-ratio: 3 / 4; border-radius: 0; overflow: hidden; cursor: pointer; background-color: var(--bg-secondary); }
@@ -356,6 +356,26 @@ section {
     .service-card.active .service-details { opacity: 1; transform: translateY(0); }
     .service-card.active .service-icon { transform: rotate(90deg); }
     .service-card.active .line-h { opacity: 0; }
+}
+
+/* --- ABOUT SECTION (HOME PAGE) --- */
+.about-section { position: relative; z-index: 20; /* Fixed overlap bug */ padding-top: 20px; padding-bottom: 160px; background-color: var(--bg-primary); }
+.about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 100px; align-items: flex-start; }
+.about-heading { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 60px; }
+.about-list { display: flex; flex-direction: column; gap: 45px; }
+.about-row { display: grid; grid-template-columns: 180px 1fr; gap: 20px; align-items: flex-start; }
+.about-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.02em; padding-top: 5px; }
+.about-text p { font-size: 1rem; color: var(--text-primary); line-height: 1.5; margin: 0; }
+.about-image { width: 100%; max-width: 450px; margin-left: auto; aspect-ratio: 4 / 5; overflow: hidden; background-color: var(--bg-secondary); }
+.about-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.about-image:hover img { transform: scale(1.04); }
+
+@media (max-width: 1100px) { .about-grid { grid-template-columns: 1fr; gap: 80px; } }
+@media (max-width: 768px) { 
+    .about-section { padding-top: 80px; padding-bottom: 80px; }
+    .about-row { grid-template-columns: 1fr; gap: 8px; } 
+    .about-heading { margin-bottom: 40px; } 
+    .about-list { gap: 30px; } 
 }
 
 /* ==========================================================================
@@ -591,6 +611,20 @@ textarea.contact-input {
     margin-top: 5px;
 }
 
+/* --- PURE CSS LOAD ANIMATIONS (For Contact Page) --- */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUpAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUpAnim {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 1100px) {
     .contact-section { padding-top: 140px; padding-bottom: 120px; }
     .contact-grid { grid-template-columns: 1fr; gap: 80px; }
@@ -646,7 +680,7 @@ textarea.contact-input {
 }
 
 .editorial-wrapper {
-    max-width: 680px; /* Forces narrow, readable editorial column */
+    max-width: 680px; 
     display: flex;
     flex-direction: column;
     gap: 80px;
@@ -669,7 +703,6 @@ textarea.contact-input {
     font-weight: 500;
 }
 
-/* Highlights the specific transition text */
 .editorial-highlight {
     font-size: clamp(1.3rem, 2.5vw, 1.6rem) !important;
     color: var(--text-primary) !important;
@@ -700,7 +733,6 @@ textarea.contact-input {
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Micro-interaction: Subtle lift */
 @media (min-width: 769px) {
     .approach-card:hover { transform: translateY(-8px); }
 }
@@ -759,8 +791,6 @@ textarea.contact-input {
     margin-bottom: 40px;
 }
 
-
-/* --- ABOUT PAGE RESPONSIVENESS --- */
 @media (max-width: 1100px) {
     .about-page-hero { padding-top: 140px; }
     .approach-grid { column-gap: 40px; row-gap: 60px; }
@@ -768,17 +798,13 @@ textarea.contact-input {
 
 @media (max-width: 768px) {
     .about-page-hero { padding-top: 120px; padding-bottom: 40px; }
-    
     .about-editorial-section { padding-top: 40px; padding-bottom: 80px; }
     .editorial-wrapper { gap: 60px; }
     .editorial-block { gap: 20px; }
-    
     .about-approach-section { padding-top: 80px; padding-bottom: 80px; }
     .approach-grid { grid-template-columns: 1fr; gap: 60px; }
     .approach-text { max-width: 100%; }
-    
     .about-philosophy-section { padding-top: 80px; padding-bottom: 100px; }
-    
     .about-cta-section { padding-top: 40px; padding-bottom: 100px; }
 }
 
@@ -786,7 +812,6 @@ textarea.contact-input {
    9. NARRATIVE ANIMATIONS (INTERSECTION OBSERVER BASE)
    ========================================================================== */
 
-/* --- CORE REVEAL CLASSES --- */
 .fade-up {
     opacity: 0;
     transform: translateY(40px);
@@ -823,21 +848,6 @@ textarea.contact-input {
     transform: scale(1);
 }
 
-/* --- PURE CSS LOAD ANIMATIONS (For Contact Page) --- */
-.fade-in-up {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUpAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes fadeInUpAnim {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* --- STAGGER SYSTEM --- */
 .stagger-1, .delay-1 { transition-delay: 0.1s; animation-delay: 0.1s; }
 .stagger-2, .delay-2 { transition-delay: 0.2s; animation-delay: 0.2s; }
 .stagger-3, .delay-3 { transition-delay: 0.3s; animation-delay: 0.3s; }
@@ -845,24 +855,18 @@ textarea.contact-input {
 .delay-5 { animation-delay: 0.5s; }
 .delay-6 { animation-delay: 0.6s; }
 
-/* --- HERO SCROLL PARALLAX --- */
 .about-page-hero {
     --scroll-offset: 0;
-    /* Uses JS calculated variable to create ultra-smooth scroll fading/moving */
     transform: translateY(calc(var(--scroll-offset) * 0.3px));
     opacity: calc(1 - (var(--scroll-offset) * 0.0025));
     will-change: transform, opacity;
 }
 
-/* --- INTERACTIVE TWEAKS --- */
-
-/* Approach Cards Dimming Effect */
 .approach-card {
     opacity: 0.7;
     transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* CTA Button Hover Scale Override */
 .about-cta-section .btn-outline {
     transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
 }
@@ -880,14 +884,11 @@ textarea.contact-input {
     }
 }
 
-/* --- MOBILE ANIMATION OVERRIDES --- */
 @media (max-width: 768px) {
-    /* Speed up reveals slightly for mobile pacing */
     .fade-up, .fade-right, .scale-up {
         transition-duration: 0.6s;
     }
     
-    /* Remove hover opacity dependency on mobile */
     .approach-card {
         opacity: 1; 
     }
