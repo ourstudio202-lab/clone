@@ -358,26 +358,6 @@ section {
     .service-card.active .line-h { opacity: 0; }
 }
 
-/* --- ABOUT SECTION --- */
-.about-section { position: relative; z-index: 2; padding-top: 20px; padding-bottom: 160px; background-color: var(--bg-primary); }
-.about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 100px; align-items: flex-start; }
-.about-heading { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 60px; }
-.about-list { display: flex; flex-direction: column; gap: 45px; }
-.about-row { display: grid; grid-template-columns: 180px 1fr; gap: 20px; align-items: flex-start; }
-.about-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.02em; padding-top: 5px; }
-.about-text p { font-size: 1rem; color: var(--text-primary); line-height: 1.5; margin: 0; }
-.about-image { width: 100%; max-width: 450px; margin-left: auto; aspect-ratio: 4 / 5; overflow: hidden; background-color: var(--bg-secondary); }
-.about-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-.about-image:hover img { transform: scale(1.04); }
-
-@media (max-width: 1100px) { .about-grid { grid-template-columns: 1fr; gap: 80px; } }
-@media (max-width: 768px) { 
-    .about-section { padding-top: 80px; padding-bottom: 80px; }
-    .about-row { grid-template-columns: 1fr; gap: 8px; } 
-    .about-heading { margin-bottom: 40px; } 
-    .about-list { gap: 30px; } 
-}
-
 /* ==========================================================================
    6. WORK PAGE STYLES
    ========================================================================== */
@@ -392,50 +372,9 @@ section {
     font-size: clamp(3.5rem, 8vw, 5.5rem);
     font-weight: 500;
     letter-spacing: -0.02em;
-    margin-bottom: 40px; 
+    margin-bottom: 60px; 
     line-height: 1;
 }
-
-/* --- FILTER NAVIGATION --- */
-.filter-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    padding-bottom: 20px;
-    margin-bottom: 40px; 
-}
-
-.filter-btn {
-    background: none;
-    border: none;
-    color: var(--text-primary);
-    font-family: var(--font-primary);
-    font-size: 1.05rem;
-    opacity: 0.75;
-    cursor: pointer;
-    padding: 0;
-    position: relative;
-    transition: opacity 0.3s ease;
-}
-
-.filter-btn:hover { opacity: 1; }
-.filter-btn.active { opacity: 1; font-weight: 500; }
-
-.filter-btn::after {
-    content: '';
-    position: absolute;
-    bottom: -21px; 
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--text-primary);
-    transform-origin: right;
-    transform: scaleX(0);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.filter-btn.active::after { transform-origin: left; transform: scaleX(1); }
 
 .work-page-grid {
     min-height: auto; 
@@ -454,6 +393,7 @@ section {
 
 .work-page-grid .work-image-wrapper {
     height: auto;
+    /* STRICTLY LOCKED TO 3/4 GLOBALLY */
     aspect-ratio: 3 / 4;
     border-radius: 0; 
 }
@@ -462,7 +402,6 @@ section {
 @media (max-width: 1100px) {
     .works-page-header { padding-top: 140px; }
     .work-page-grid { padding-bottom: 120px; }
-    .filter-nav { gap: 1.5rem; }
     
     .work-page-grid .works-grid { 
         grid-template-columns: repeat(2, 1fr); 
@@ -472,18 +411,8 @@ section {
 
 @media (max-width: 768px) {
     .works-page-header { padding-top: 120px; }
-    .works-page-title { margin-bottom: 30px; }
+    .works-page-title { margin-bottom: 40px; } 
     .work-page-grid { padding-bottom: 80px; }
-    
-    .filter-nav { 
-        column-gap: 1.25rem; 
-        row-gap: 2.5rem; 
-        padding-bottom: 15px; 
-        margin-bottom: 40px; 
-    }
-    
-    .filter-btn { font-weight: 500; }
-    .filter-btn::after { bottom: -12px; } 
 
     .work-page-grid .works-grid { 
         grid-template-columns: 1fr; 
@@ -501,10 +430,9 @@ section {
     padding-bottom: 160px;
     background-color: var(--bg-primary);
     min-height: 100vh;
-    overflow: hidden; /* Contains the glowing orb */
+    overflow: hidden; 
 }
 
-/* --- THE AMBIENT GLOW (Premium Visual Touch) --- */
 .ambient-glow {
     position: absolute;
     top: 10%;
@@ -519,7 +447,6 @@ section {
     z-index: 0;
 }
 
-/* --- HEADER --- */
 .contact-page-header {
     position: relative;
     z-index: 2;
@@ -541,7 +468,6 @@ section {
     line-height: 1.6;
 }
 
-/* --- GRID LAYOUT --- */
 .contact-grid {
     position: relative;
     z-index: 2;
@@ -551,7 +477,6 @@ section {
     align-items: flex-start;
 }
 
-/* --- THE FORM --- */
 .minimal-form {
     display: flex;
     flex-direction: column;
@@ -626,7 +551,6 @@ textarea.contact-input {
     background-color: #d9d9d9; 
 }
 
-/* --- CONTACT INFO BLOCK --- */
 .contact-info-wrapper {
     display: flex;
     flex-direction: column;
@@ -667,35 +591,9 @@ textarea.contact-input {
     margin-top: 5px;
 }
 
-/* --- PURE CSS LOAD ANIMATIONS --- */
-.fade-in-up {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUpAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes fadeInUpAnim {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-.delay-5 { animation-delay: 0.5s; }
-.delay-6 { animation-delay: 0.6s; }
-
-/* --- CONTACT PAGE RESPONSIVENESS --- */
 @media (max-width: 1100px) {
     .contact-section { padding-top: 140px; padding-bottom: 120px; }
-    .contact-grid { 
-        grid-template-columns: 1fr; 
-        gap: 80px; 
-    }
-    
+    .contact-grid { grid-template-columns: 1fr; gap: 80px; }
     .contact-form-wrapper { order: 1; }
     .contact-info-wrapper { order: 2; flex-direction: row; flex-wrap: wrap; gap: 40px; }
     .info-block { flex: 1 1 45%; }
@@ -706,10 +604,8 @@ textarea.contact-input {
     .contact-page-header { margin-bottom: 50px; }
     .contact-grid { gap: 60px; }
     .minimal-form { gap: 25px; }
-    
     .contact-input { font-size: 1rem; padding: 12px 0; }
     .btn-filled { padding: 1rem 2rem; width: 100%; text-align: center; }
-    
     .contact-info-wrapper { flex-direction: column; gap: 35px; }
     .info-text { font-size: 1.25rem; }
 }
@@ -927,11 +823,27 @@ textarea.contact-input {
     transform: scale(1);
 }
 
+/* --- PURE CSS LOAD ANIMATIONS (For Contact Page) --- */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUpAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUpAnim {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* --- STAGGER SYSTEM --- */
-.stagger-1 { transition-delay: 0.1s; }
-.stagger-2 { transition-delay: 0.2s; }
-.stagger-3 { transition-delay: 0.3s; }
-.stagger-4 { transition-delay: 0.4s; }
+.stagger-1, .delay-1 { transition-delay: 0.1s; animation-delay: 0.1s; }
+.stagger-2, .delay-2 { transition-delay: 0.2s; animation-delay: 0.2s; }
+.stagger-3, .delay-3 { transition-delay: 0.3s; animation-delay: 0.3s; }
+.stagger-4, .delay-4 { transition-delay: 0.4s; animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
 
 /* --- HERO SCROLL PARALLAX --- */
 .about-page-hero {
