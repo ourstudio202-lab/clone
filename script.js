@@ -35,6 +35,15 @@ document.addEventListener("DOMContentLoaded", () => {
 // 3. GLOBAL ANIMATIONS (Navbar, Mobile Menu, Page Transitions)
 // ==========================================================================
 function initGlobalInteractions() {
+    
+    // --- BROWSER BACK BUTTON FIX (BFCache) ---
+    // If the browser loads the page from cache (Back button), reset opacity to visible!
+    window.addEventListener("pageshow", (event) => {
+        if (event.persisted) {
+            gsap.set("#smooth-wrapper", { clearProps: "all" });
+        }
+    });
+
     const header = document.querySelector(".site-header");
     
     if (header && typeof gsap !== "undefined") {
@@ -78,7 +87,8 @@ function initGlobalInteractions() {
             const href = link.getAttribute('href');
             
             // Only trigger on internal HTML links that aren't the current active tab
-            if (href && href.includes('.html') && !e.ctrlKey && !e.metaKey && !link.classList.contains('active')) {
+            // ALSO check to make sure it's not a blank "#" link
+            if (href && href !== "#" && href.includes('.html') && !e.ctrlKey && !e.metaKey && !link.classList.contains('active')) {
                 e.preventDefault(); 
                 
                 // Close the mobile menu automatically if it's open
