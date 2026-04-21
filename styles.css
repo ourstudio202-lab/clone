@@ -905,12 +905,13 @@ textarea.contact-input {
     --ed-space-lg: 120px;
 }
 
-/* Global Section Basis */
-.ed-section {
+/* Global Section Basis & BUG FIX */
+.ed-section, .ed-hero {
     background-color: var(--bg-primary);
+    min-height: auto !important; /* Kills the global 100vh rule causing massive gaps! */
 }
 
-/* SPACING UTILITIES (Ensures perfect mathematical rhythm) */
+/* SPACING UTILITIES */
 .pt-none { padding-top: 0 !important; }
 .pt-sm   { padding-top: var(--ed-space-sm) !important; }
 .pt-md   { padding-top: var(--ed-space-md) !important; }
@@ -924,7 +925,7 @@ textarea.contact-input {
 /* --- 1. HERO - HOOK --- */
 .ed-hero {
     padding-top: 180px;
-    background-color: var(--bg-primary);
+    padding-bottom: 50px; /* Precise 50px gap between meta and banner */
 }
 
 .ed-title {
@@ -933,15 +934,17 @@ textarea.contact-input {
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: var(--text-primary);
-    margin-bottom: 8px; /* Subtitle pulled up extremely tight */
+    margin-bottom: 8px; 
 }
 
 .ed-meta {
     font-size: clamp(1.1rem, 2vw, 1.35rem);
     color: var(--text-secondary);
     letter-spacing: 0.02em;
+    margin-bottom: 0; /* Resets default browser margins */
 }
 
+/* ... (Keep the rest of Section 10 exactly as it was) ... */
 /* --- 2 & 5. BANNER IMAGES (21:9 RATIO) --- */
 .ed-banner-wrapper {
     width: 100%;
