@@ -895,63 +895,100 @@ textarea.contact-input {
 }
 
 /* ==========================================================================
-   10. EDITORIAL PROJECT SYSTEM (FRAMER-STYLE STORYTELLING)
+   10. EDITORIAL PROJECT SYSTEM (REFINED PORTFOLIO UI)
    ========================================================================== */
+
+/* --- STRICT SPACING SCALE --- */
+:root {
+    --ed-space-sm: 40px;
+    --ed-space-md: 80px;
+    --ed-space-lg: 120px;
+}
+
+/* Global Section Basis */
+.ed-section {
+    background-color: var(--bg-primary);
+}
+
+/* SPACING UTILITIES (Ensures perfect mathematical rhythm) */
+.pt-none { padding-top: 0 !important; }
+.pt-sm   { padding-top: var(--ed-space-sm) !important; }
+.pt-md   { padding-top: var(--ed-space-md) !important; }
+.pt-lg   { padding-top: var(--ed-space-lg) !important; }
+
+.pb-none { padding-bottom: 0 !important; }
+.pb-sm   { padding-bottom: var(--ed-space-sm) !important; }
+.pb-md   { padding-bottom: var(--ed-space-md) !important; }
+.pb-lg   { padding-bottom: var(--ed-space-lg) !important; }
 
 /* --- 1. HERO - HOOK --- */
 .ed-hero {
-    padding-top: 220px; 
-    padding-bottom: 60px;
+    padding-top: 180px;
     background-color: var(--bg-primary);
 }
 
 .ed-title {
-    font-size: clamp(4rem, 9vw, 7.5rem);
-    font-weight: 500;
-    line-height: 1;
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 600; /* Bolder, more dominant hierarchy */
+    line-height: 1.05;
     letter-spacing: -0.02em;
     color: var(--text-primary);
-    margin-bottom: 20px;
+    margin-bottom: 12px; /* Subtitle pulled up tight */
 }
 
 .ed-meta {
-    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
     color: var(--text-secondary);
     letter-spacing: 0.02em;
-    text-transform: uppercase;
 }
 
-/* --- GLOBAL SECTION SPACING --- */
-.ed-section {
-    padding-top: 80px;
-    padding-bottom: 80px;
-    background-color: var(--bg-primary);
+/* --- 2 & 7. BANNER IMAGES (21:9 RATIO) --- */
+.ed-banner-wrapper {
+    width: 100%;
+    aspect-ratio: 21 / 9; /* Cinematic ultra-wide cut */
+    background-color: var(--bg-secondary);
+    overflow: hidden;
 }
 
-.ed-padding-none { padding-top: 0; padding-bottom: 0; }
-.ed-padding-large { padding-top: 140px; padding-bottom: 140px; }
-
-/* --- NARROW TEXT BLOCKS --- */
-.ed-context-section {
-    padding-top: 0; 
+.ed-banner-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
 }
 
+@media (min-width: 769px) {
+    .ed-banner-wrapper:hover img {
+        transform: scale(1.03); /* Premium micro-interaction */
+    }
+}
+
+/* --- 4. ABOUT TEXT BLOCK --- */
 .ed-text-narrow {
     max-width: 600px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 24px;
 }
 
 .ed-text-narrow p {
-    font-size: clamp(1.15rem, 2.5vw, 1.4rem);
-    line-height: 1.6;
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    line-height: 1.75; /* Increased for premium editorial breathability */
     color: var(--text-secondary);
 }
 
-/* --- IMAGE HANDLING --- */
+/* --- 5. IMAGE GRID (4:3 LANDSCAPE RATIO) --- */
+.ed-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px; /* Precise, consistent gap */
+}
+
 .ed-image-wrapper {
     width: 100%;
+    aspect-ratio: 4 / 3; /* Strictly enforced 4:3 landscape ratio */
     background-color: var(--bg-secondary);
     overflow: hidden;
 }
@@ -967,79 +1004,61 @@ textarea.contact-input {
 
 @media (min-width: 769px) {
     .ed-image-wrapper:hover img {
-        transform: scale(1.03); 
+        transform: scale(1.03);
     }
 }
 
-/* --- ASYMMETRICAL STORY GRID --- */
-.ed-media-asymmetric {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    align-items: flex-start;
-}
-
-.ed-media-asymmetric .ed-image-wrapper {
-    aspect-ratio: 4 / 5;
-}
-
-@media (min-width: 769px) {
-    .ed-offset-y {
-        transform: translateY(120px); 
-    }
-    .ed-media-asymmetric {
-        padding-bottom: 120px; 
-    }
-}
-
-/* --- NEXT PROJECT --- */
-.ed-next-project {
-    padding-top: 160px;
-    padding-bottom: 180px;
-    text-align: center;
-    background-color: var(--bg-primary);
+/* ==========================================================================
+   11. MORE WORKS GRID (PROJECT FOOTER)
+   ========================================================================== */
+.ed-more-works {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.ed-next-label {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 25px;
+.ed-more-header {
+    margin-bottom: 60px;
 }
 
-.ed-next-title {
-    display: inline-block;
-    font-size: clamp(3.5rem, 8vw, 7rem);
-    font-weight: 500;
-    letter-spacing: -0.02em;
+.ed-subheading {
+    font-size: 1.5rem;
     color: var(--text-primary);
-    text-decoration: none;
-    line-height: 1;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    font-weight: 500;
+    margin: 0;
 }
 
-@media (min-width: 769px) {
-    .ed-next-title:hover {
-        opacity: 0.6;
-        transform: translateY(-12px);
-    }
+/* Force the grid to 3 columns, perfectly matching the Works Page */
+.works-grid.grid-3-cols {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 30px;
+    row-gap: 80px;
+}
+
+/* Locks the 'More Works' cards to the 3:4 portrait ratio */
+.works-grid.grid-3-cols .work-image-wrapper {
+    aspect-ratio: 3 / 4;
+    border-radius: 0;
 }
 
 /* --- RESPONSIVENESS --- */
 @media (max-width: 1100px) {
-    .ed-hero { padding-top: 180px; }
-    .ed-media-asymmetric { gap: 30px; }
+    .works-grid.grid-3-cols { grid-template-columns: repeat(2, 1fr); row-gap: 60px; }
 }
 
 @media (max-width: 768px) {
-    .ed-hero { padding-top: 140px; padding-bottom: 40px; }
-    .ed-title { margin-bottom: 10px; }
-    .ed-section { padding-top: 50px; padding-bottom: 50px; }
-    .ed-text-narrow p { font-size: 1.15rem; color: var(--text-primary); }
-    .ed-media-asymmetric { grid-template-columns: 1fr; gap: 30px; padding-bottom: 0; }
-    .ed-offset-y { transform: translateY(0) !important; }
-    .ed-next-project { padding-top: 100px; padding-bottom: 120px; }
+    /* Compress spacing scale for mobile */
+    :root {
+        --ed-space-sm: 30px;
+        --ed-space-md: 60px;
+        --ed-space-lg: 80px;
+    }
+    
+    .ed-hero { padding-top: 140px; }
+    .ed-title { font-size: 3rem; margin-bottom: 8px; }
+    
+    /* Re-stack grids to 1 column */
+    .ed-gallery-grid { grid-template-columns: 1fr; gap: 20px; }
+    .works-grid.grid-3-cols { grid-template-columns: 1fr; gap: 50px; }
+    
+    /* Slightly taller banner on mobile to prevent it from getting too thin */
+    .ed-banner-wrapper { aspect-ratio: 16 / 9; }
 }
