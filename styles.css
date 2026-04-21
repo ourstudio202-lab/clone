@@ -929,11 +929,11 @@ textarea.contact-input {
 
 .ed-title {
     font-size: clamp(3.5rem, 8vw, 6.5rem);
-    font-weight: 600; /* Bolder, more dominant hierarchy */
+    font-weight: 600; 
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: var(--text-primary);
-    margin-bottom: 12px; /* Subtitle pulled up tight */
+    margin-bottom: 8px; /* Subtitle pulled up extremely tight */
 }
 
 .ed-meta {
@@ -942,7 +942,7 @@ textarea.contact-input {
     letter-spacing: 0.02em;
 }
 
-/* --- 2 & 7. BANNER IMAGES (21:9 RATIO) --- */
+/* --- 2 & 5. BANNER IMAGES (21:9 RATIO) --- */
 .ed-banner-wrapper {
     width: 100%;
     aspect-ratio: 21 / 9; /* Cinematic ultra-wide cut */
@@ -961,11 +961,11 @@ textarea.contact-input {
 
 @media (min-width: 769px) {
     .ed-banner-wrapper:hover img {
-        transform: scale(1.03); /* Premium micro-interaction */
+        transform: scale(1.03); 
     }
 }
 
-/* --- 4. ABOUT TEXT BLOCK --- */
+/* --- 3. ABOUT TEXT BLOCK --- */
 .ed-text-narrow {
     max-width: 600px;
     display: flex;
@@ -975,20 +975,20 @@ textarea.contact-input {
 
 .ed-text-narrow p {
     font-size: clamp(1.1rem, 2vw, 1.25rem);
-    line-height: 1.75; /* Increased for premium editorial breathability */
+    line-height: 1.75; 
     color: var(--text-secondary);
 }
 
-/* --- 5. IMAGE GRID (4:3 LANDSCAPE RATIO) --- */
+/* --- 4. IMAGE GRID (4:3 LANDSCAPE RATIO) --- */
 .ed-gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px; /* Precise, consistent gap */
+    gap: 25px; /* Matched perfectly to homepage grid spacing */
 }
 
 .ed-image-wrapper {
     width: 100%;
-    aspect-ratio: 4 / 3; /* Strictly enforced 4:3 landscape ratio */
+    aspect-ratio: 4 / 3; 
     background-color: var(--bg-secondary);
     overflow: hidden;
 }
@@ -1015,17 +1015,6 @@ textarea.contact-input {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.ed-more-header {
-    margin-bottom: 60px;
-}
-
-.ed-subheading {
-    font-size: 1.5rem;
-    color: var(--text-primary);
-    font-weight: 500;
-    margin: 0;
-}
-
 /* Force the grid to 3 columns, perfectly matching the Works Page */
 .works-grid.grid-3-cols {
     grid-template-columns: repeat(3, 1fr);
@@ -1033,7 +1022,6 @@ textarea.contact-input {
     row-gap: 80px;
 }
 
-/* Locks the 'More Works' cards to the 3:4 portrait ratio */
 .works-grid.grid-3-cols .work-image-wrapper {
     aspect-ratio: 3 / 4;
     border-radius: 0;
@@ -1059,6 +1047,5 @@ textarea.contact-input {
     .ed-gallery-grid { grid-template-columns: 1fr; gap: 20px; }
     .works-grid.grid-3-cols { grid-template-columns: 1fr; gap: 50px; }
     
-    /* Slightly taller banner on mobile to prevent it from getting too thin */
     .ed-banner-wrapper { aspect-ratio: 16 / 9; }
 }
