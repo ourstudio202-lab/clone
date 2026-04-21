@@ -155,7 +155,7 @@ section {
    ========================================================================== */
 .site-footer {
     position: relative;
-    z-index: 20; /* Fixed overlap bug */
+    z-index: 20; 
     background-color: var(--bg-primary); 
     padding: 4rem clamp(40px, 5vw, 60px) 2rem; 
     border-top: 1px solid rgba(255, 255, 255, 0.15); 
@@ -259,19 +259,33 @@ section {
 /* --- HERO SECTION --- */
 .hero-section {
     height: 100vh; width: 100%; display: flex; justify-content: center; align-items: center;
-    background-color: var(--bg-primary); padding: 0 max(20px, var(--padding-x));
+    background-color: var(--bg-primary); 
+    padding: 0; 
     position: sticky; top: 0; z-index: 1; transform-origin: center center; overflow: hidden; 
 }
-.hero-pop-images { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-.hero-pop-images img { position: absolute; top: 0; left: 0; width: clamp(200px, 18vw, 320px); aspect-ratio: 3 / 4; object-fit: cover; opacity: 0; border-radius: 4px; }
-.hero-content { width: 100%; display: flex; justify-content: center; align-items: center; position: relative; z-index: 10; }
-.hero-title { font-family: var(--font-display); display: flex; flex-direction: column; align-items: center; color: var(--text-primary); text-align: center; line-height: 1.0; transform: translateY(40px); }
-.hero-title .line-1 { font-size: clamp(5rem, 12vw, 160px); font-weight: 400; transform: translateX(-40px); }
-.hero-title .line-2 { font-size: clamp(2.5rem, 5vw, 70px); font-weight: 400; margin: 15px 0; transform: translateX(10px) translateY(18px); z-index: 2; }
-.hero-title .line-3 { font-size: clamp(5rem, 12vw, 160px); font-weight: 400; transform: translateX(40px); }
+
+.hero-content { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    z-index: 1; 
+}
+
+.hero-main-image {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+.hero-pop-images { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    pointer-events: none; 
+    z-index: 20; 
+}
+
+.hero-pop-images img { 
+    position: absolute; top: 0; left: 0; width: clamp(200px, 18vw, 320px); 
+    aspect-ratio: 3 / 4; object-fit: cover; opacity: 0; border-radius: 4px; 
+}
 
 /* --- SELECTED WORKS SECTION --- */
-.selected-works { position: relative; z-index: 20; /* Fixed overlap bug */ margin-top: 0; background-color: var(--bg-primary); padding-top: 160px; padding-bottom: 90px; min-height: auto; }
+.selected-works { position: relative; z-index: 20; margin-top: 0; background-color: var(--bg-primary); padding-top: 160px; padding-bottom: 90px; min-height: auto; }
 .works-container { max-width: 1800px; margin: 0 auto; padding: 0 clamp(40px, 5vw, 60px); }
 .works-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
 .works-header h2 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: var(--text-primary); }
@@ -296,7 +310,6 @@ section {
 .work-info h3 { font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -0.01em; }
 .work-info p { font-size: 0.95rem; color: var(--text-secondary); }
 
-/* --- SELECTED WORKS RESPONSIVENESS --- */
 @media (max-width: 1100px) {
     .selected-works { padding-top: 120px; }
     .works-grid { column-gap: 20px; row-gap: 40px; }
@@ -314,7 +327,7 @@ section {
 }
 
 /* --- SERVICES SECTION --- */
-.services-section { position: relative; z-index: 20; /* Fixed overlap bug */ padding-top: 20px; padding-bottom: 80px; background-color: var(--bg-primary); }
+.services-section { position: relative; z-index: 20; padding-top: 20px; padding-bottom: 80px; background-color: var(--bg-primary); }
 .services-header { justify-content: flex-start; margin-bottom: 40px; }
 .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
 .service-card { position: relative; aspect-ratio: 3 / 4; border-radius: 0; overflow: hidden; cursor: pointer; background-color: var(--bg-secondary); }
@@ -330,7 +343,6 @@ section {
 .service-details { margin-top: 15px; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 .service-details p { font-size: 1.05rem; line-height: 1.6; color: #e5e5e5; }
 
-/* --- DESKTOP HOVER INTERACTION (≥769px) --- */
 @media (min-width: 769px) {
     .service-card:hover .service-bg { transform: scale(1.05); }
     .service-card:hover .service-overlay { opacity: 1; }
@@ -339,7 +351,6 @@ section {
     .service-card:hover .line-h { opacity: 0; }
 }
 
-/* --- SERVICES RESPONSIVENESS --- */
 @media (max-width: 1100px) { 
     .services-section { padding-top: 120px; padding-bottom: 100px; }
     .services-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; } 
@@ -350,7 +361,6 @@ section {
     .services-grid { grid-template-columns: 1fr; gap: 25px; } 
     .service-content { padding: 20px; }
     
-    /* --- MOBILE ACCORDION INTERACTION (≤768px) --- */
     .service-card.active .service-bg { transform: scale(1.05); }
     .service-card.active .service-overlay { opacity: 1; }
     .service-card.active .service-details { opacity: 1; transform: translateY(0); }
@@ -359,7 +369,7 @@ section {
 }
 
 /* --- ABOUT SECTION (HOME PAGE) --- */
-.about-section { position: relative; z-index: 20; /* Fixed overlap bug */ padding-top: 20px; padding-bottom: 160px; background-color: var(--bg-primary); }
+.about-section { position: relative; z-index: 20; padding-top: 20px; padding-bottom: 160px; background-color: var(--bg-primary); }
 .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 100px; align-items: flex-start; }
 .about-heading { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 60px; }
 .about-list { display: flex; flex-direction: column; gap: 45px; }
@@ -404,7 +414,6 @@ section {
     background-color: var(--bg-primary);
 }
 
-/* --- WORK PAGE GRID OVERRIDES (3-Column Layout) --- */
 .work-page-grid .works-grid {
     grid-template-columns: repeat(3, 1fr);
     column-gap: 30px;
@@ -413,12 +422,10 @@ section {
 
 .work-page-grid .work-image-wrapper {
     height: auto;
-    /* STRICTLY LOCKED TO 3/4 GLOBALLY */
     aspect-ratio: 3 / 4;
     border-radius: 0; 
 }
 
-/* --- Mobile / Tablet Adjustments --- */
 @media (max-width: 1100px) {
     .works-page-header { padding-top: 140px; }
     .work-page-grid { padding-bottom: 120px; }
@@ -611,7 +618,6 @@ textarea.contact-input {
     margin-top: 5px;
 }
 
-/* --- PURE CSS LOAD ANIMATIONS (For Contact Page) --- */
 .fade-in-up {
     opacity: 0;
     transform: translateY(30px);
@@ -944,7 +950,6 @@ textarea.contact-input {
     margin-bottom: 0; /* Resets default browser margins */
 }
 
-/* ... (Keep the rest of Section 10 exactly as it was) ... */
 /* --- 2 & 5. BANNER IMAGES (21:9 RATIO) --- */
 .ed-banner-wrapper {
     width: 100%;
