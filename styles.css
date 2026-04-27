@@ -227,9 +227,11 @@ section {
 .footer-contact-info p { font-size: 1.1rem; color: #e5e5e5; letter-spacing: 0.02em; }
 .footer-socials { display: flex; gap: 1.25rem; }
 
-/* SVG ICON CENTERING */
+/* ENLARGED SVG ICON CENTERING */
 .social-circle {
-    width: 45px; height: 45px; background-color: #d9d9d9; border-radius: 50%;
+    width: 50px; height: 50px; /* BUMPED SIZE */
+    background-color: #d9d9d9; 
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -265,7 +267,9 @@ section {
     .nav-links a { font-size: 2.5rem; font-weight: 500; letter-spacing: -0.02em; }
 
     .footer-container { flex-direction: column; align-items: flex-start; gap: 40px; }
-    .social-circle { width: 40px; height: 40px; }
+    .footer-heading { font-size: 3.25rem; }
+    .footer-right { padding-bottom: 0; }
+    .social-circle { width: 45px; height: 45px; } /* Scales down smoothly for mobile */
     .btn-outline { padding: 0.6rem 1.5rem; font-size: 0.9rem; }
 }
 
