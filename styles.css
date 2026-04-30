@@ -9,7 +9,7 @@
     --accent-color: #ffffff;
 
     --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-display: "Sarina", cursive;
+    --font-heading: "Unbounded", sans-serif; /* NEW UNBOUNDED HEADING FONT */
     
     --container-max-width: 1440px;
     --padding-x: 5vw;
@@ -50,6 +50,20 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden; 
+}
+
+/* APPLY NEW HEADING FONT GLOBALLY */
+h1, h2, h3, h4, h5, h6, 
+.ed-title, 
+.works-page-title, 
+.about-hero-title, 
+.contact-page-title,
+.footer-heading,
+.about-heading,
+.approach-title,
+.philosophy-heading,
+.cta-heading {
+    font-family: var(--font-heading);
 }
 
 img, picture, video, canvas, svg {
