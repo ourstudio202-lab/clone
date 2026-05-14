@@ -522,7 +522,7 @@ textarea.contact-input { min-height: 120px; resize: vertical; }
 .ed-banner-wrapper { width: 100%; aspect-ratio: 21 / 9 !important; background-color: var(--bg-secondary); overflow: hidden; }
 .ed-banner-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
 @media (min-width: 769px) { .ed-banner-wrapper:hover img { transform: scale(1.03); } }
-.ed-text-narrow { max-width: 600px; display: flex; flex-direction: column; gap: 24px; }
+.ed-text-narrow { display: flex; flex-direction: column; gap: 24px; }
 .ed-text-narrow p { font-size: clamp(1.1rem, 2vw, 1.25rem); line-height: 1.75; color: var(--text-secondary); }
 .ed-gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 30px; row-gap: 30px; }
 .ed-image-wrapper { width: 100%; aspect-ratio: 4 / 3 !important; background-color: var(--bg-secondary); overflow: hidden; }
