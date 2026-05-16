@@ -1,0 +1,318 @@
+@use "../../scss/utilities/breakpoints" as *;
+
+/* ═══════════════════════════════════════════════════════════════
+   WORKS SECTION — premium editorial grid
+═══════════════════════════════════════════════════════════════ */
+
+.section {
+  position: relative;
+  z-index: 20;
+  background: var(--bg-primary);
+  padding: clamp(80px, 10vw, 140px) 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 clamp(40px, 5vw, 80px);
+}
+
+/* ── Section header ─────────────────────────────────────────── */
+.sectionHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: clamp(28px, 3.5vw, 52px);
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--text-primary);
+  display: flex;
+  gap: 0.28em;
+}
+
+/* each word sits inside overflow:hidden — GSAP clips it */
+.titleWrap {
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1.1;
+}
+
+.titleWord {
+  display: inline-block;
+  /* GSAP animates yPercent + opacity */
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* See all link */
+.seeAll {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  opacity: 0;
+  /* GSAP reveals */
+  will-change: transform, opacity;
+  transition: color 0.35s ease, border-color 0.35s ease;
+  white-space: nowrap;
+  align-self: flex-end;
+  margin-bottom: 6px;
+
+  svg {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.4);
+
+    svg {
+      transform: translate(3px, -3px);
+    }
+  }
+}
+
+/* ── Divider line ───────────────────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: clamp(48px, 6vw, 88px);
+  transform-origin: left;
+  transform: scaleX(0);
+  /* GSAP draws it */
+  will-change: transform;
+}
+
+/* ── Grid ───────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: clamp(24px, 2.5vw, 44px);
+  row-gap: clamp(48px, 6vw, 90px);
+  align-items: start;
+}
+
+/* ── Project card ───────────────────────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Odd-indexed cards drop down to create staggered gallery rhythm */
+.cardOffset {
+  // margin-top: clamp(48px, 7vw, 110px);
+}
+
+.cardLink {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Project number */
+.cardNum {
+  font-family: var(--font-primary);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.2);
+  display: block;
+  margin-bottom: clamp(12px, 1.4vw, 20px);
+  opacity: 0;
+  /* GSAP reveals */
+  will-change: transform, opacity;
+}
+
+/* ── Image block ─────────────────────────────────────────────
+   Clip-path is applied here by GSAP.
+   Inner div is taller than outer for parallax room.            */
+.imageClip {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #111;
+  clip-path: inset(100% 0 0 0 round 4px);
+  /* GSAP animates this */
+  will-change: clip-path;
+  border-radius: 4px;
+
+  &:hover .overlay {
+    opacity: 1;
+  }
+
+  &:hover .img {
+    transform: scale(1.03);
+  }
+}
+
+/* Parallax wrapper — 16% taller so movement doesn't expose edges */
+.imageInner {
+  position: relative;
+  width: 100%;
+  height: auto;
+  will-change: transform;
+  display: block;
+  line-height: 0;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Hover overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 4, 4, 0.52);
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(20px, 2.5vw, 36px);
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+
+.overlayContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateY(8px);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .imageClip:hover & {
+    transform: translateY(0);
+  }
+}
+
+.overlayLabel {
+  font-family: var(--font-primary);
+  font-size: clamp(0.65rem, 0.8vw, 0.78rem);
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.overlay svg {
+  color: rgba(255, 255, 255, 0.8);
+  flex-shrink: 0;
+}
+
+/* ── Card separator line ─────────────────────────────────────── */
+.cardLine {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: clamp(18px, 2vw, 28px) 0 clamp(14px, 1.6vw, 22px);
+  transform-origin: left;
+  transform: scaleX(0);
+  /* GSAP draws it */
+  will-change: transform;
+}
+
+/* ── Card info ───────────────────────────────────────────────── */
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Title clip container */
+.titleClip {
+  overflow: hidden;
+  line-height: 1.15;
+}
+
+.cardTitle {
+  font-family: var(--font-primary);
+  font-size: clamp(0.95rem, 1.2vw, 1.25rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  /* GSAP clips up */
+  will-change: transform, opacity;
+}
+
+.cardCategory {
+  font-family: var(--font-primary);
+  font-size: clamp(0.72rem, 0.85vw, 0.82rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0;
+  /* GSAP fades in */
+  will-change: transform, opacity;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .grid {
+    column-gap: clamp(16px, 2vw, 28px);
+  }
+
+  .cardOffset {
+    margin-top: clamp(36px, 5vw, 72px);
+  }
+}
+
+@include tablet {
+  .sectionTitle {
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+  }
+
+  .sectionHead {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .seeAll {
+    align-self: flex-start;
+    margin-bottom: 0;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    row-gap: clamp(40px, 6vw, 64px);
+  }
+
+  /* No stagger offset on single column */
+  .cardOffset {
+    margin-top: 0;
+  }
+
+  .imageClip {
+    aspect-ratio: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .imageClip {
+    aspect-ratio: auto;
+  }
+}

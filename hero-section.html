@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design with Intent.</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    /* ── Canvas bokeh background ── */
+    #bokeh-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Hero wrapper ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 11vw;
+    }
+
+    /* ── Headline block ── */
+    .headline {
+      display: flex;
+      flex-direction: column;
+      line-height: 0.92;
+      margin-bottom: 4.5vw;
+    }
+
+    /* Clip-reveal container — each line gets one */
+    .line-wrap {
+      overflow: hidden;
+      display: block;
+    }
+
+    .line-inner {
+      display: block;
+      transform: translateY(110%);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    /* Individual word styling */
+    .word-design {
+      font-size: clamp(90px, 11.5vw, 185px);
+      font-weight: 300;
+      color: #f5f0eb;
+      letter-spacing: -0.01em;
+      margin-left: 0;
+    }
+
+    .word-with {
+      font-size: clamp(64px, 8.2vw, 130px);
+      font-weight: 300;
+      font-style: italic;
+      color: #b5a38a;
+      letter-spacing: 0.01em;
+      margin-left: 6vw;
+    }
+
+    .word-intent {
+      font-size: clamp(90px, 11.5vw, 185px);
+      font-weight: 300;
+      color: #f5f0eb;
+      letter-spacing: -0.01em;
+      margin-left: 10vw;
+    }
+
+    /* ── Bottom row: subtitle + CTA ── */
+    .bottom-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 4vw;
+    }
+
+    .subtitle {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(9px, 0.75vw, 13px);
+      font-weight: 400;
+      font-style: normal;
+      color: #7a6f64;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      line-height: 1.9;
+      max-width: 220px;
+      opacity: 0;
+      transform: translateY(18px);
+      will-change: transform, opacity;
+    }
+
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      margin-top: 2.5rem;
+      opacity: 0;
+      transform: translateY(18px);
+      will-change: transform, opacity;
+    }
+
+    .cta-label {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(9px, 0.72vw, 12px);
+      font-weight: 400;
+      color: #c8bfb4;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .cta-circle {
+      width: clamp(38px, 3vw, 50px);
+      height: clamp(38px, 3vw, 50px);
+      border-radius: 50%;
+      border: 1px solid #5a5148;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.4s ease, background 0.4s ease;
+      flex-shrink: 0;
+    }
+
+    .cta-circle:hover {
+      border-color: #c8bfb4;
+      background: rgba(200,191,180,0.05);
+    }
+
+    .cta-circle svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: #c8bfb4;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.35s ease;
+    }
+
+    .cta-circle:hover svg {
+      transform: translate(2px, -2px);
+    }
+
+    /* ── Animations ── */
+    @keyframes revealUp {
+      0% {
+        transform: translateY(110%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0%);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Applied via JS with staggered delays */
+    .animate-reveal {
+      animation: revealUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .animate-fade {
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bokeh background canvas -->
+  <canvas id="bokeh-canvas"></canvas>
+
+  <!-- Hero Section -->
+  <section class="hero">
+
+    <!-- Main headline -->
+    <div class="headline">
+
+      <span class="line-wrap">
+        <span class="line-inner word-design" id="line-design">Design</span>
+      </span>
+
+      <span class="line-wrap">
+        <span class="line-inner word-with" id="line-with"><em>with</em></span>
+      </span>
+
+      <span class="line-wrap">
+        <span class="line-inner word-intent" id="line-intent">Intent.</span>
+      </span>
+
+    </div>
+
+    <!-- Subtitle + CTA -->
+    <div class="bottom-row">
+      <div>
+        <p class="subtitle" id="subtitle">
+          A creative design agency<br>
+          building iconic brands and<br>
+          digital experiences that<br>
+          drive culture forward.
+        </p>
+        <div class="cta-row" id="cta">
+          <span class="cta-label">View our work</span>
+          <button class="cta-circle" aria-label="View our work">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <line x1="5" y1="19" x2="19" y2="5"/>
+              <polyline points="5 5 19 5 19 19"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    /* ─────────────────────────────────────────
+       BOKEH / PARTICLE BACKGROUND
+    ───────────────────────────────────────── */
+    const canvas = document.getElementById('bokeh-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let W, H;
+    const particles = [];
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Bokeh particle definition
+    function createParticle() {
+      const side = Math.random();
+      // Concentrate particles on the right/centre-right like in the reference
+      const x = W * (0.45 + Math.random() * 0.55);
+      const y = H * (0.1 + Math.random() * 0.8);
+      const radius = 1 + Math.random() * (Math.random() < 0.08 ? 120 : 6);
+      const opacity = radius > 30
+        ? 0.04 + Math.random() * 0.09
+        : 0.15 + Math.random() * 0.5;
+      const speed  = 0.05 + Math.random() * 0.12;
+      const drift  = (Math.random() - 0.5) * 0.3;
+      const color  = Math.random() < 0.15 ? '#ffffff' : '#d4c8b8';
+      return { x, y, radius, opacity, speed, drift, color, vy: -speed };
+    }
+
+    // Seed initial particles
+    for (let i = 0; i < 120; i++) {
+      const p = createParticle();
+      p.y = Math.random() * H; // scatter vertically on load
+      particles.push(p);
+    }
+
+    function drawBokeh() {
+      ctx.clearRect(0, 0, W, H);
+
+      for (const p of particles) {
+        // Soft glow for large orbs
+        if (p.radius > 20) {
+          const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+          grd.addColorStop(0, `rgba(220,210,195,${p.opacity})`);
+          grd.addColorStop(1, `rgba(0,0,0,0)`);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = grd;
+          ctx.fill();
+        } else {
+          // Tiny sparkle dots
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(220,210,195,${p.opacity})`;
+          ctx.fill();
+        }
+
+        // Move
+        p.y  += p.vy;
+        p.x  += p.drift;
+        p.opacity -= 0.0004;
+
+        // Recycle
+        if (p.y + p.radius < 0 || p.opacity <= 0) {
+          Object.assign(p, createParticle());
+        }
+      }
+
+      requestAnimationFrame(drawBokeh);
+    }
+    drawBokeh();
+
+    /* ─────────────────────────────────────────
+       STAGGERED TEXT REVEAL ANIMATION
+    ───────────────────────────────────────── */
+    const delays = {
+      'line-design' : 200,
+      'line-with'   : 420,
+      'line-intent' : 640,
+      'subtitle'    : 980,
+      'cta'         : 1150,
+    };
+
+    // Trigger reveals after a short page-load pause
+    window.addEventListener('DOMContentLoaded', () => {
+      // Lines: clip-reveal (translateY)
+      ['line-design', 'line-with', 'line-intent'].forEach(id => {
+        const el = document.getElementById(id);
+        setTimeout(() => {
+          el.classList.add('animate-reveal');
+        }, delays[id]);
+      });
+
+      // Subtitle + CTA: fade-up
+      ['subtitle', 'cta'].forEach(id => {
+        const el = document.getElementById(id);
+        setTimeout(() => {
+          el.classList.add('animate-fade');
+        }, delays[id]);
+      });
+    });
+  </script>
+</body>
+</html>

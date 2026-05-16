@@ -1,0 +1,79 @@
+@use "../../scss/utilities/breakpoints" as *;
+
+.container {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 clamp(40px, 5vw, 60px);
+}
+
+.header {
+  padding-top: 180px;
+  padding-bottom: 0;
+  background-color: var(--bg-primary);
+}
+
+.title {
+  font-size: clamp(3.5rem, 8vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-sm);
+  line-height: 1;
+}
+
+.gridSection {
+  padding-top: var(--space-md);
+  padding-bottom: var(--space-lg);
+  background-color: var(--bg-primary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 30px;
+  row-gap: 40px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: inherit;
+}
+
+.imgWrap {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+
+  img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.8s var(--ease-out-expo);
+  }
+  &:hover img { transform: scale(1.04); }
+}
+
+.info {
+  h3 {
+    font-family: var(--font-primary);
+    font-size: 1.15rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  p { font-size: 0.95rem; color: var(--text-secondary); }
+}
+
+@media (max-width: 1100px) {
+  .header { padding-top: 140px; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@include tablet {
+  .header { padding-top: 120px; }
+  .grid { grid-template-columns: 1fr; gap: 40px; }
+}

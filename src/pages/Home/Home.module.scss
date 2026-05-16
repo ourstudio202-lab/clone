@@ -1,0 +1,530 @@
+@use "../../scss/utilities/breakpoints" as *;
+
+/* ─── Shared container ──────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 clamp(40px, 5vw, 60px);
+}
+
+/* ─── Hero ──────────────────────────────────────────────────────── */
+.hero {
+  height: 100vh;
+  width: 100%;
+  background-color: #000;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* bokeh canvas — fills the hero, sits behind everything */
+.bokehCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* text content wrapper — left-aligned, full width */
+.heroContent {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  padding: 0 clamp(40px, 8vw, 120px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 80px;
+
+}
+
+/* ── Headline block ── */
+.headline {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.5;
+  margin-bottom: clamp(32px, 4vw, 64px);
+}
+
+/* clip-reveal: overflow hidden masks the text until GSAP slides it into view */
+.lineWrap {
+  display: block;
+  // overflow: hidden;
+
+  /* prevents descenders being clipped */
+}
+
+.lineInner {
+  display: block;
+  /* GSAP animates from yPercent:110 → 0 */
+  opacity: 0;
+  will-change: transform, opacity;
+  line-height: 0.9;
+}
+
+/* Individual word styles */
+.wordDesign {
+  // font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(80px, 11vw, 175px);
+  font-weight: 300;
+  font-style: normal;
+  color: #f2ede8;
+  letter-spacing: -0.015em;
+  font-family: Unbounded;
+
+  margin-left: 0;
+}
+
+.wordWith {
+  // font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: Unbounded;
+  font-size: clamp(58px, 7.8vw, 125px);
+  font-weight: 300;
+  font-style: italic;
+  color: #b09a7e;
+  letter-spacing: 0.01em;
+  // margin-left: clamp(40px, 5.5vw, 90px);
+}
+
+.wordIntent {
+  font-family: Unbounded;
+  // font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(80px, 11vw, 175px);
+  font-weight: 300;
+  font-style: normal;
+  color: #f2ede8;
+  letter-spacing: -0.015em;
+  // margin-left: clamp(80px, 10vw, 160px);
+}
+
+/* ── Bottom row: subtitle + CTA ── */
+.heroBottom {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 48px);
+}
+
+.heroSubtitle {
+  // font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(9px, 0.72vw, 12px);
+  font-weight: 400;
+  color: #aeaba9;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 2;
+  opacity: 0;
+  /* GSAP will fade in */
+  will-change: transform, opacity;
+}
+
+.heroCta {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.5vw, 24px);
+  opacity: 0;
+  /* GSAP will fade in */
+  will-change: transform, opacity;
+}
+
+.ctaLabel {
+  // font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(9px, 1vw, 18px);
+  font-weight: 400;
+  color: #b8afa5;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ctaCircle {
+  width: clamp(36px, 2.8vw, 48px);
+  height: clamp(36px, 2.8vw, 48px);
+  border-radius: 50%;
+  border: 1px solid #4a4540;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #b8afa5;
+  transition: border-color 0.4s ease, background 0.4s ease, color 0.4s ease;
+
+  svg {
+    width: 13px;
+    height: 13px;
+    transition: transform 0.35s ease;
+  }
+
+  &:hover {
+    border-color: #b8afa5;
+    background: rgba(184, 175, 165, 0.06);
+
+    svg {
+      transform: translate(2px, -2px);
+    }
+  }
+}
+
+/* Pop images (mouse-follow) */
+.popImages {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: clamp(200px, 18vw, 320px);
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    opacity: 0;
+    border-radius: 4px;
+    will-change: transform, opacity;
+  }
+}
+
+/* ─── Shared section ────────────────────────────────────────────── */
+.section {
+  position: relative;
+  z-index: 20;
+  background-color: var(--bg-primary);
+  padding: var(--space-md) 0;
+}
+
+.worksSection {
+  padding-top: var(--space-lg);
+}
+
+/* ─── Works header ──────────────────────────────────────────────── */
+.worksHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--space-sm);
+
+  h2 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--text-primary);
+  }
+}
+
+.seeAll {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(163, 163, 163, 0.3);
+  transition: color 0.3s ease, border-color 0.3s ease;
+
+  svg {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+
+    svg {
+      transform: translate(3px, -3px);
+    }
+  }
+}
+
+/* ─── Works grid ────────────────────────────────────────────────── */
+.worksGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 30px;
+  row-gap: 40px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.imgWrap {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.8s var(--ease-out-expo);
+  }
+
+  &:hover img {
+    transform: scale(1.04);
+  }
+}
+
+.info {
+  h3 {
+    font-family: var(--font-primary);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+}
+
+/* ─── Services ──────────────────────────────────────────────────── */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.service {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--bg-secondary);
+  transition: transform 0.6s var(--ease-out-expo), outline 0.3s ease;
+  transform: translateZ(0);
+
+  .serviceBg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease-out-expo);
+    z-index: 1;
+  }
+
+  .serviceOverlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(10, 10, 10, 0.6);
+    opacity: 1;
+    transition: background-color 0.5s ease;
+    z-index: 2;
+  }
+
+  .serviceContent {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 30px;
+  }
+
+  .serviceTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+  }
+
+  .serviceIcon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s var(--ease-out-expo);
+
+    .lineH,
+    .lineV {
+      position: absolute;
+      background-color: var(--text-primary);
+      transition: opacity 0.3s ease;
+    }
+
+    .lineH {
+      width: 100%;
+      height: 2px;
+    }
+
+    .lineV {
+      width: 2px;
+      height: 100%;
+    }
+  }
+
+  .serviceDetails {
+    margin-top: 15px;
+    opacity: 1;
+    transform: translateY(0);
+    transition: color 0.3s ease;
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #e5e5e5;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    outline: 1px solid rgba(255, 255, 255, 0.2);
+    outline-offset: -1px;
+
+    .serviceBg {
+      transform: scale(1.1);
+    }
+
+    .serviceOverlay {
+      background-color: rgba(10, 10, 10, 0.4);
+    }
+
+    .serviceIcon {
+      transform: rotate(90deg);
+    }
+
+    .lineH {
+      opacity: 0;
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@include tablet {
+  .worksHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .worksGrid,
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .serviceContent {
+    padding: 20px;
+  }
+
+  /* Hero mobile adjustments */
+  .heroContent {
+    padding: 0 clamp(24px, 5vw, 60px);
+  }
+
+  .wordWith {
+    margin-left: clamp(24px, 4vw, 60px);
+  }
+
+  .wordIntent {
+    margin-left: clamp(48px, 7vw, 100px);
+  }
+
+  .heroSubtitle {
+    font-size: clamp(8px, 2.2vw, 11px);
+  }
+
+  .heroBottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+/* ─── About ─────────────────────────────────────────────────────── */
+.aboutSection {
+  padding-top: var(--space-md);
+  padding-bottom: var(--space-lg);
+}
+
+.aboutInner {
+  max-width: 900px;
+}
+
+.aboutHeading {
+  font-size: clamp(2.5rem, 3vw, 1.5rem);
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.aboutList {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.aboutRow {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.aboutLabel {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding-top: 5px;
+}
+
+.aboutText {
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+@include tablet {
+  .aboutRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .aboutList {
+    gap: 30px;
+  }
+}
