@@ -457,11 +457,12 @@
   }
 
   .wordWith {
-    margin-left: clamp(24px, 4vw, 60px);
+    margin-left: 0;
   }
 
   .wordIntent {
     margin-left: clamp(48px, 7vw, 100px);
+    margin-left: 0;
   }
 
   .heroSubtitle {

@@ -219,11 +219,15 @@ export default function Home({ ready = false }: HomeProps) {
       {/* ── Hero ── */}
       <section ref={heroRef} className={styles.hero}>
         {/* Bokeh canvas */}
-        <img
-          src="/images/homepage/LandingPageHeroImg.png"
-          alt="Hero Background"
-          className={styles.heroBg}
-        />
+        <picture className={styles.heroBg}>
+          <source media="(max-width: 868px)" srcSet="/images/homepage/LandingPageHeroImgMob.png" />
+          <img
+            src="/images/homepage/LandingPageHeroImg.png"
+            alt="Hero Background"
+            fetchPriority="high"
+            loading="eager"
+          />
+        </picture>
         <div className={styles.heroOverlay} />
         <canvas ref={canvasRef} className={styles.bokehCanvas} />
         {/* Pop images on mouse move */}
