@@ -23,19 +23,21 @@
 }
 
 .header { position: relative; z-index: 2; margin-bottom: 80px; max-width: 800px; }
-.title { font-size: clamp(3.5rem, 8vw, 5.5rem); line-height: 1.05; margin-bottom: 20px; }
+.title { font-size: clamp(2.2rem, 7vw, 5.5rem); line-height: 1.05; margin-bottom: 20px; }
 .subtitle { font-size: 1.25rem; color: var(--text-secondary); line-height: 1.6; font-family: var(--font-primary); }
 
 .info { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 50px; max-width: 800px; }
 .block { display: flex; flex-direction: column; gap: 10px; }
 .label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; }
 .text {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-size: clamp(1.1rem, 2.8vw, 2.25rem);
   color: var(--text-primary);
   font-family: var(--font-heading);
   letter-spacing: -0.01em;
   line-height: 1.2;
   transition: opacity 0.3s ease;
+  overflow-wrap: break-word;
+  word-break: break-word;
   &:hover { opacity: 0.6; }
 }
 
@@ -54,4 +56,16 @@
   .section { padding-top: 130px; padding-bottom: 100px; }
   .header { margin-bottom: 50px; }
   .info { gap: 35px; }
+}
+
+@include mobile {
+  .container { padding: 0 24px; }
+  .title { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+  .subtitle { font-size: 1.1rem; }
+  .text { 
+    font-size: clamp(1.2rem, 6vw, 1.8rem); 
+    word-break: break-all;
+    overflow-wrap: break-word;
+  }
+  .info { gap: 28px; }
 }

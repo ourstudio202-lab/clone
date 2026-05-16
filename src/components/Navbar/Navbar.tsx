@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Navbar.module.scss";
 
 const links = [
-  { to: "/",        label: "Home",    end: true },
-  { to: "/about",   label: "About"              },
-  { to: "/work",    label: "Work"               },
-  { to: "/contact", label: "Contact"            },
+  { to: "/", label: "Home", end: true },
+  { to: "/about", label: "About" },
+  { to: "/work", label: "Work" },
+  { to: "/contact", label: "Contact" },
 ];
 
 interface NavbarProps {
@@ -16,8 +16,8 @@ interface NavbarProps {
 
 const headerVariants = {
   hidden: { y: -100, opacity: 0 },
-  visible: { 
-    y: 0, 
+  visible: {
+    y: 0,
     opacity: 1,
     transition: {
       duration: 1.2,
@@ -30,8 +30,8 @@ const headerVariants = {
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
-  visible: { 
-    y: 0, 
+  visible: {
+    y: 0,
     opacity: 1,
     transition: {
       duration: 0.8,
@@ -42,7 +42,7 @@ const itemVariants = {
 
 export default function Navbar({ ready = false }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
-  const [open,     setOpen]     = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -70,7 +70,7 @@ export default function Navbar({ ready = false }: NavbarProps) {
         {/* ── Logo group ── */}
         <Link to="/" className={styles.logo} onClick={() => setOpen(false)}>
           <motion.div className={styles.logoWrapper} variants={itemVariants}>
-            
+
             <div className={styles.logoClip}>
               <img
                 src="/logo.png"

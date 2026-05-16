@@ -25,7 +25,7 @@ function ScrollToTop() {
 
 export default function App() {
   // loading = loader is still in DOM
-  // ready   = loader panel has fully cleared (2.05 s) — trigger entrance animations
+  // ready   = loader panel has fully cleared (5.6 s) — trigger entrance animations
   const [loading, setLoading] = useState(true);
   const [ready,   setReady]   = useState(false);
   useLenis();
@@ -36,9 +36,10 @@ export default function App() {
       window.history.scrollRestoration = "manual";
     }
 
-    // loader curtain starts at 1.3 s, fully gone at 2.05 s
-    const tReady   = setTimeout(() => setReady(true),   2050);
-    const tUnmount = setTimeout(() => setLoading(false), 2200);
+    // loader panel slides up at 4.6 s, fully gone at 5.6 s
+    // fire ready just as the panel begins moving so navbar + hero enter behind it
+    const tReady   = setTimeout(() => setReady(true),   4700);
+    const tUnmount = setTimeout(() => setLoading(false), 5800);
     return () => { clearTimeout(tReady); clearTimeout(tUnmount); };
   }, []);
 

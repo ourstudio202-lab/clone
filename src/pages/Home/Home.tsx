@@ -225,7 +225,7 @@ export default function Home({ ready = false }: HomeProps) {
           className={styles.heroBg}
         />
         <div className={styles.heroOverlay} />
-        {/* <canvas ref={canvasRef} className={styles.bokehCanvas} /> */}
+        <canvas ref={canvasRef} className={styles.bokehCanvas} />
         {/* Pop images on mouse move */}
         {/* <div ref={popContainerRef} className={styles.popImages}>
           {HERO_POP_IMAGES.map((src, i) => (

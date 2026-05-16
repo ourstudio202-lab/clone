@@ -1,15 +1,17 @@
 /* ─────────────────────────────────────────────────────────────
-   Loader — 2-second cinematic intro
+   Loader — 5.6-second cinematic intro
    Timeline:
-     0.10 s  logo fades + scales in              (0.55 s)
-     0.42 s  studio name chars rise              (stagger 0.03 s)
-     0.85 s  divider extends                     (0.40 s)
-     1.00 s  subtext chars fade up               (stagger 0.022 s)
-     1.30 s  whole panel slides upward           (0.75 s)
-     2.05 s  fully gone
+     0.15 s  logo fades + scales in                (0.90 s)
+     0.15 s  ring traces around logo               (1.80 s)
+     0.30 s  progress bar begins filling           (4.10 s → done at 4.40 s)
+     1.00 s  studio name chars clip up             (stagger 0.065 s × 17)
+     2.10 s  divider extends                       (0.70 s)
+     2.50 s  subtext chars fade up                 (stagger 0.048 s × 30)
+     4.60 s  whole panel slides upward             (1.00 s)
+     5.60 s  fully gone
 ───────────────────────────────────────────────────────────── */
 
-/* ── Root overlay — slides upward at 1.3 s ── */
+/* ── Root overlay — slides upward at 4.60 s ── */
 .loader {
   position: fixed;
   inset: 0;
@@ -21,7 +23,7 @@
   overflow: hidden;
   pointer-events: all;
   will-change: transform;
-  animation: loaderUp 0.75s cubic-bezier(0.76, 0, 0.24, 1) 1.3s forwards;
+  animation: loaderUp 1.0s cubic-bezier(0.76, 0, 0.24, 1) 4.6s forwards;
 }
 
 /* ── Centred content ── */
@@ -34,32 +36,77 @@
   gap: 0;
 }
 
-/* ── Logo — opacity + scale only (GPU composited, no jank) ── */
-.logoWrap {
-  margin-bottom: 1.6rem;
+/* ── Ambient radial glow behind content ── */
+.glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle at center,
+    rgba(180, 160, 130, 0.055) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
   opacity: 0;
-  transform: scale(0.86) translateY(6px);
-  animation: logoIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  animation: glowPulse 3.0s ease-in-out 0.5s forwards;
+}
+
+/* ── Logo wrapper ── */
+.logoWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.2rem;
+  opacity: 0;
+  transform: scale(0.84) translateY(8px);
+  animation: logoIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
   will-change: transform, opacity;
 }
 
 .logoImg {
-  height: clamp(52px, 7vw, 82px);
+  height: clamp(52px, 7vw, 80px);
   width: auto;
   filter: brightness(0) invert(1);
+  position: relative;
+  z-index: 2;
+}
+
+/* ── SVG ring that traces around the logo ── */
+.logoRing {
+  position: absolute;
+  width: clamp(120px, 16vw, 170px);
+  height: clamp(120px, 16vw, 170px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg); /* start trace from top */
+  overflow: visible;
+  z-index: 1;
+}
+
+/* The animated trace circle */
+.ringTrace {
+  /* circumference of r=52: 2 × π × 52 ≈ 326.7 */
+  stroke-dasharray: 326.7;
+  stroke-dashoffset: 326.7;
+  animation: ringDraw 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  will-change: stroke-dashoffset;
 }
 
 /* ── Studio name ── */
 .nameRow {
   font-family: var(--font-heading);
-  font-size: clamp(1rem, 2vw, 1.55rem);
+  font-size: clamp(1rem, 2vw, 1.5rem);
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #ffffff;
   display: flex;
   overflow: hidden;
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.8rem;
 }
 
 .nameChar {
@@ -67,32 +114,32 @@
   white-space: pre;
   transform: translateY(115%);
   opacity: 0;
-  animation: charRise 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: charRise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   will-change: transform, opacity;
 }
 
-/* ── Thin divider ── */
+/* ── Divider ── */
 .divider {
   width: 0;
   height: 1px;
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.28),
+    rgba(255, 255, 255, 0.3),
     transparent
   );
-  margin-bottom: 0.7rem;
-  animation: lineExtend 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.85s forwards;
+  margin-bottom: 0.85rem;
+  animation: lineExtend 0.7s cubic-bezier(0.16, 1, 0.3, 1) 2.1s forwards;
   will-change: width;
 }
 
-/* ── Sub-label ── */
+/* ── Subtext ── */
 .subtextRow {
   font-family: var(--font-primary);
-  font-size: clamp(0.58rem, 0.8vw, 0.72rem);
-  letter-spacing: 0.3em;
+  font-size: clamp(0.58rem, 0.8vw, 0.70rem);
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.36);
+  color: rgba(255, 255, 255, 0.35);
   display: flex;
   overflow: hidden;
 }
@@ -106,12 +153,56 @@
   will-change: transform, opacity;
 }
 
+/* ── Progress bar at the bottom ── */
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 0%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.22),
+    rgba(255, 255, 255, 0.55),
+    rgba(255, 255, 255, 0.22),
+    transparent
+  );
+  animation: progressFill 4.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+  will-change: width;
+}
+
+/* ── Footer labels ── */
+.footerLabel {
+  position: absolute;
+  bottom: clamp(20px, 3vw, 36px);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 clamp(28px, 4vw, 52px);
+  opacity: 0;
+  animation: footerIn 0.8s ease 1.4s forwards;
+}
+
+.footerText {
+  font-family: var(--font-primary);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.18);
+}
+
 /* ──────────────────────────────────────────
-   Keyframes — only transform + opacity
+   Keyframes
 ────────────────────────────────────────── */
 
 @keyframes logoIn {
   to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes ringDraw {
+  to { stroke-dashoffset: 0; }
 }
 
 @keyframes charRise {
@@ -124,6 +215,21 @@
 
 @keyframes lineExtend {
   to { width: clamp(160px, 24vw, 300px); }
+}
+
+@keyframes progressFill {
+  0%   { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes glowPulse {
+  0%   { opacity: 0; }
+  40%  { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+@keyframes footerIn {
+  to { opacity: 1; }
 }
 
 /* Whole loader slides upward — reveals website underneath */
