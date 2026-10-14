@@ -8,14 +8,19 @@ import About from "./pages/About/About";
 import Work from "./pages/Work/Work";
 import Contact from "./pages/Contact/Contact";
 import Project from "./pages/Projects/Project";
+import Services from "./pages/Services/Services";
+import ServicePage from "./pages/Services/ServicePage";
 import { useLenis } from "./hooks/useLenis";
 
 import { useLayoutEffect } from "react";
 
+// useLayoutEffect warns during the build-time prerender; fall back to useEffect there
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
-  useLayoutEffect(() => {
+  useIsoLayoutEffect(() => {
     // Force immediate scroll to top before paint
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -52,6 +57,8 @@ export default function App() {
         <Routes>
           <Route path="/"              element={<Home ready={ready} />} />
           <Route path="/about"         element={<About />} />
+          <Route path="/services"      element={<Services />} />
+          <Route path="/services/:slug" element={<ServicePage />} />
           <Route path="/work"          element={<Work />} />
           <Route path="/contact"       element={<Contact />} />
           <Route path="/projects/:slug" element={<Project />} />

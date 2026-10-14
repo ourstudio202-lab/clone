@@ -2,7 +2,6 @@
    Loader — 5.6-second cinematic intro
    Timeline:
      0.15 s  logo fades + scales in                (0.90 s)
-     0.15 s  ring traces around logo               (1.80 s)
      0.30 s  progress bar begins filling           (4.10 s → done at 4.40 s)
      1.00 s  studio name chars clip up             (stagger 0.065 s × 17)
      2.10 s  divider extends                       (0.70 s)
@@ -68,32 +67,11 @@
 }
 
 .logoImg {
-  height: clamp(52px, 7vw, 80px);
+  height: clamp(36px, 4.5vw, 52px);
   width: auto;
   filter: brightness(0) invert(1);
   position: relative;
   z-index: 2;
-}
-
-/* ── SVG ring that traces around the logo ── */
-.logoRing {
-  position: absolute;
-  width: clamp(120px, 16vw, 170px);
-  height: clamp(120px, 16vw, 170px);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-90deg); /* start trace from top */
-  overflow: visible;
-  z-index: 1;
-}
-
-/* The animated trace circle */
-.ringTrace {
-  /* circumference of r=52: 2 × π × 52 ≈ 326.7 */
-  stroke-dasharray: 326.7;
-  stroke-dashoffset: 326.7;
-  animation: ringDraw 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
-  will-change: stroke-dashoffset;
 }
 
 /* ── Studio name ── */
@@ -199,10 +177,6 @@
 
 @keyframes logoIn {
   to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-@keyframes ringDraw {
-  to { stroke-dashoffset: 0; }
 }
 
 @keyframes charRise {

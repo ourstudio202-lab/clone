@@ -1,4 +1,5 @@
-import { Helmet } from "react-helmet-async";
+import Seo from "@/components/Seo/Seo";
+import { businessSchema, breadcrumbSchema } from "@/data/seo";
 import styles from "./About.module.scss";
 import { useReveal } from "@/hooks/useReveal";
 
@@ -13,10 +14,12 @@ export default function About() {
   useReveal([]);
   return (
     <>
-      <Helmet>
-        <title>The Design Elves | About</title>
-        <meta name="description" content="An independent creative studio built on one belief — design should work, not just exist." />
-      </Helmet>
+      <Seo
+        title="About The Design Elves | Independent Design Studio in Pune"
+        description="The Design Elves is an independent creative studio in Pune, built on one belief — design should work, not just exist. Meet our approach to branding and design."
+        path="/about"
+        schema={[businessSchema(), breadcrumbSchema([{ name: "Home", path: "/" }, { name: "About", path: "/about" }])]}
+      />
 
       <section className={styles.hero}>
         <div className={styles.container}>
@@ -25,7 +28,7 @@ export default function About() {
             We make them make sense.
           </h1>
           <p className={`${styles.subtitle} fade-up stagger-1`}>
-            Design Elves is a creative studio built on one simple belief —<br />
+            Design Elves is a Pune-based creative studio built on one simple belief —<br />
             design should work, not just exist.
           </p>
         </div>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./Footer.module.scss";
+import { SERVICE_PAGES } from "@/data/seo";
 
 export default function Footer() {
   return (
@@ -12,10 +13,18 @@ export default function Footer() {
           <Link to="/contact" className={styles.btn}>Contact Now</Link>
         </div>
 
+        <nav className={styles.services} aria-label="Services">
+          <span className={styles.servicesLabel}>Services</span>
+          {SERVICE_PAGES.map((s) => (
+            <Link key={s.slug} to={`/services/${s.slug}`}>{s.navLabel} in Pune</Link>
+          ))}
+        </nav>
+
         <div className={styles.right}>
           <div className={styles.contact}>
-            <p>thedesignelves@gmail.com</p>
-            <p>+91 9098111911</p>
+            <p><a href="mailto:thedesignelves@gmail.com">thedesignelves@gmail.com</a></p>
+            <p><a href="tel:+919098111911">+91 9098111911</a></p>
+            <p>Pune, Maharashtra, India</p>
           </div>
           <div className={styles.socials}>
             <a className={styles.social} aria-label="Instagram" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/the_design_elves?igsh=MWViMXo4Mnl3MWM3cw==">

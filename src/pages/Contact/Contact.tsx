@@ -1,4 +1,5 @@
-import { Helmet } from "react-helmet-async";
+import Seo from "@/components/Seo/Seo";
+import { businessSchema, breadcrumbSchema } from "@/data/seo";
 import styles from "./Contact.module.scss";
 import { useReveal } from "@/hooks/useReveal";
 
@@ -6,10 +7,12 @@ export default function Contact() {
   useReveal([]);
   return (
     <>
-      <Helmet>
-        <title>The Design Elves | Contact</title>
-        <meta name="description" content="Let’s build something great. Tell us about your project — we'll get back within 24 hours." />
-      </Helmet>
+      <Seo
+        title="Contact The Design Elves | Design Studio in Pune"
+        description="Contact The Design Elves, a branding and design studio in Pune. Email thedesignelves@gmail.com or call +91 9098111911 — we reply within 24 hours."
+        path="/contact"
+        schema={[businessSchema(), breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])]}
+      />
 
       <section className={styles.section}>
         <div className={styles.glow} />

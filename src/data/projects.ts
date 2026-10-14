@@ -116,12 +116,12 @@ export const PROJECTS: ProjectMeta[] = [
 ];
 
 export const SERVICES = [
-  { title: "BRAND IDENTITY", img: "/images/homepage/service 1.jpg", body: "We don’t just make logos—we build brands people remember, recognize, and can’t ignore." },
-  { title: "PACKAGING", img: "/images/homepage/service 2.jpg", body: "Packaging that doesn’t blend in—it stands out, gets picked, and sells." },
-  { title: "AD CREATIVES", img: "/images/homepage/service 3.jpg", body: "Thumb-stopping creatives built to cut through noise and make people actually care." },
-  { title: "3D & MOTION", img: "/images/homepage/service 4.jpg", body: "Bold 3D and motion that hits hard, moves fast, and brings your brand to life." },
-  { title: "SOCIAL CONTENT", img: "/images/homepage/service 5.jpg", body: "Social content that feels native, sharp, and makes scrollers stop and tap." },
-  { title: "WEB DESIGN", img: "/images/homepage/service 6.jpg", body: "Websites that look sharp, load fast, and turn clicks into customers." },
+  { title: "BRAND IDENTITY", slug: "branding-agency-pune", img: "/images/homepage/service 1.jpg", body: "We don’t just make logos—we build brands people remember, recognize, and can’t ignore." },
+  { title: "PACKAGING", slug: "packaging-design-pune", img: "/images/homepage/service 2.jpg", body: "Packaging that doesn’t blend in—it stands out, gets picked, and sells." },
+  { title: "AD CREATIVES", slug: "social-media-design-pune", img: "/images/homepage/service 3.jpg", body: "Thumb-stopping creatives built to cut through noise and make people actually care." },
+  { title: "3D & MOTION", slug: "3d-motion-design-pune", img: "/images/homepage/service 4.jpg", body: "Bold 3D and motion that hits hard, moves fast, and brings your brand to life." },
+  { title: "SOCIAL CONTENT", slug: "social-media-design-pune", img: "/images/homepage/service 5.jpg", body: "Social content that feels native, sharp, and makes scrollers stop and tap." },
+  { title: "WEB DESIGN", slug: "website-design-pune", img: "/images/homepage/service 6.jpg", body: "Websites that look sharp, load fast, and turn clicks into customers." },
 ];
 
 export const HERO_POP_IMAGES = [

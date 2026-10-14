@@ -56,6 +56,22 @@
   p { font-size: 1.1rem; color: #e5e5e5; letter-spacing: 0.02em; }
 }
 
+.services {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  a { font-size: 1rem; color: #bdbdbd; transition: color 0.3s ease; }
+  a:hover { color: #ffffff; }
+}
+
+.servicesLabel {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
 .socials { display: flex; gap: 1.25rem; }
 
 .social {

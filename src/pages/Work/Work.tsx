@@ -1,4 +1,5 @@
-import { Helmet } from "react-helmet-async";
+import Seo from "@/components/Seo/Seo";
+import { breadcrumbSchema } from "@/data/seo";
 import { Link } from "react-router-dom";
 import styles from "./Work.module.scss";
 import { PROJECTS } from "@/data/projects";
@@ -8,10 +9,12 @@ export default function Work() {
   useReveal([]);
   return (
     <>
-      <Helmet>
-        <title>The Design Elves | Work</title>
-        <meta name="description" content="Selected works — branding, packaging, identity systems and digital experiences." />
-      </Helmet>
+      <Seo
+        title="Our Work | Branding & Packaging Portfolio | The Design Elves, Pune"
+        description="Selected branding, packaging and identity projects by The Design Elves, a design studio in Pune — Eliosa, Corryco, YUL, Vyom, Skrunch and Modest."
+        path="/work"
+        schema={[breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Work", path: "/work" }])]}
+      />
 
       <section className={styles.header}>
         <div className={styles.container}>

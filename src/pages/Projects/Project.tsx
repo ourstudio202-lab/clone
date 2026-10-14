@@ -1,6 +1,7 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { Helmet } from "react-helmet-async";
+import Seo from "@/components/Seo/Seo";
+import { SITE, abs, breadcrumbSchema } from "@/data/seo";
 import styles from "./Project.module.scss";
 import { getProject, getOtherProjects } from "@/data/projects";
 import { useReveal } from "@/hooks/useReveal";
@@ -20,17 +21,37 @@ export default function Project() {
 
   return (
     <>
-      <Helmet>
-        <title>{`The Design Elves | ${project.title}`}</title>
-        <meta name="description" content={project.description.slice(0, 160)} />
-      </Helmet>
+      <Seo
+        title={`${project.title} — ${project.category} | The Design Elves`}
+        description={project.description.slice(0, 155).replace(/\s+\S*$/, "") + "…"}
+        path={`/projects/${project.slug}`}
+        image={project.bannerTop}
+        type="article"
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: project.title,
+            genre: project.category,
+            description: project.description,
+            image: abs(project.bannerTop),
+            url: abs(`/projects/${project.slug}`),
+            creator: { "@id": `${SITE.url}/#business` },
+          },
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Work", path: "/work" },
+            { name: project.title, path: `/projects/${project.slug}` },
+          ]),
+        ]}
+      />
 
       <section className={styles.hero}>
         <div className={styles.container}>
           <h1 className={`${styles.title} fade-up`}>{project.title}</h1>
           <p className={`${styles.meta} fade-up stagger-1`}>{project.category}</p>
           <div className={`${styles.banner} fade-up stagger-2`}>
-            <img src={project.bannerTop} alt={`${project.title} banner`} />
+            <img src={project.bannerTop} alt={`${project.title} ${project.category.toLowerCase()} by The Design Elves`} />
           </div>
         </div>
       </section>

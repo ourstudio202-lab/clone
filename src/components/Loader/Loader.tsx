@@ -15,19 +15,8 @@ export default function Loader() {
 
       <div className={styles.content}>
 
-        {/* ── Logo with drawing ring ── */}
+        {/* ── Logo ── */}
         <div className={styles.logoWrap}>
-          {/* SVG ring that traces around the logo */}
-          <svg className={styles.logoRing} viewBox="0 0 110 110" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <circle cx="55" cy="55" r="52"
-              stroke="rgba(255,255,255,0.14)"
-              strokeWidth="0.75" />
-            <circle className={styles.ringTrace} cx="55" cy="55" r="52"
-              stroke="rgba(255,255,255,0.55)"
-              strokeWidth="0.75"
-              strokeLinecap="round" />
-          </svg>
           <img src="/logo-icon.png" alt="The Design Elves" className={styles.logoImg} />
         </div>
 

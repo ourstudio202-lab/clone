@@ -50,12 +50,12 @@
 }
 
 .logoImg {
-  height: 46px;
+  height: 38px;
   width: auto;
   filter: brightness(0) invert(1);
   object-fit: contain;
   display: block;
-  @include tablet { height: 36px; }
+  @include tablet { height: 30px; }
 }
 
 .separator {

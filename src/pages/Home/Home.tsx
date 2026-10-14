@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import Seo from "@/components/Seo/Seo";
+import { businessSchema, websiteSchema } from "@/data/seo";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./Home.module.scss";
@@ -211,10 +212,12 @@ export default function Home({ ready = false }: HomeProps) {
 
   return (
     <>
-      <Helmet>
-        <title>The Design Elves | Independent Design Studio</title>
-        <meta name="description" content="An independent studio building brands that matter — branding, packaging, UI/UX, and cinematic digital experiences." />
-      </Helmet>
+      <Seo
+        title="The Design Elves | Branding & Design Studio in Pune"
+        description="The Design Elves is an independent branding and design studio in Pune — brand identity, logo, packaging, website, UI/UX, social media and 3D/motion design."
+        path="/"
+        schema={[businessSchema(), websiteSchema()]}
+      />
 
       {/* ── Hero ── */}
       <section ref={heroRef} className={styles.hero}>
@@ -223,7 +226,7 @@ export default function Home({ ready = false }: HomeProps) {
           <source media="(max-width: 868px)" srcSet="/images/homepage/LandingPageHeroImgMob.png" />
           <img
             src="/images/homepage/LandingPageHeroImg.png"
-            alt="Hero Background"
+            alt=""
             fetchPriority="high"
             loading="eager"
           />
@@ -238,19 +241,19 @@ export default function Home({ ready = false }: HomeProps) {
         </div> */}
         {/* Text content */}
         <div className={styles.heroContent}>
-          <div className={styles.headline}>
+          <h1 className={styles.headline}>
 
             <span className={styles.lineWrap}>
               <span ref={lineDesignRef} className={`${styles.lineInner} ${styles.wordDesign}`}>
                 Design
               </span>
-            </span>
+            </span>{" "}
 
             <span className={styles.lineWrap}>
               <em ref={lineWithRef} className={`${styles.lineInner} ${styles.wordWith}`}>
                 with
               </em>
-            </span>
+            </span>{" "}
 
             <span className={styles.lineWrap}>
               <span ref={lineIntentRef} className={`${styles.lineInner} ${styles.wordIntent}`}>
@@ -258,12 +261,12 @@ export default function Home({ ready = false }: HomeProps) {
               </span>
             </span>
 
-          </div>
+          </h1>
 
           {/* Bottom row */}
           <div className={styles.heroBottom}>
             <p ref={subtitleRef} className={styles.heroSubtitle}>
-              A creative design agency
+              A Pune-based design studio
               building iconic brands and<br />
               digital experiences that
               drive culture forward.
@@ -294,12 +297,13 @@ export default function Home({ ready = false }: HomeProps) {
       <section className={styles.section}>
         <div className={styles.container}>
           <div className={`${styles.worksHeader} fade-up`} style={{ justifyContent: "flex-start" }}>
-            <h2>Services</h2>
+            <h2><Link to="/services">Services</Link></h2>
           </div>
           <div className={styles.servicesGrid}>
             {SERVICES.map((s, i) => (
-              <div
+              <Link
                 key={s.title}
+                to={`/services/${s.slug}`}
                 className={`${styles.service} fade-up`}
               >
                 <img className={styles.serviceBg} src={s.img} alt={s.title} loading="lazy" />
@@ -316,7 +320,7 @@ export default function Home({ ready = false }: HomeProps) {
                     <p>{s.body}</p>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
