@@ -73,22 +73,10 @@ export default function Navbar({ ready = false }: NavbarProps) {
 
             <div className={styles.logoClip}>
               <img
-                src="/logo.png"
+                src="/logo-lockup.png"
                 alt="The Design Elves"
                 className={styles.logoImg}
               />
-            </div>
-
-            <div className={styles.separator} />
-
-            <div className={styles.subText}>
-              {["CREATIVE", "DESIGN", "AGENCY"].map((word) => (
-                <div key={word} className={styles.subTextClip}>
-                  <span className={styles.subTextWord}>
-                    {word}
-                  </span>
-                </div>
-              ))}
             </div>
 
           </motion.div>

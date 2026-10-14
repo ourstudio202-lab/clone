@@ -28,7 +28,7 @@ export default function Loader() {
               strokeWidth="0.75"
               strokeLinecap="round" />
           </svg>
-          <img src="/logo.png" alt="The Design Elves" className={styles.logoImg} />
+          <img src="/logo-icon.png" alt="The Design Elves" className={styles.logoImg} />
         </div>
 
         {/* ── Studio name — each char clips up ── */}
